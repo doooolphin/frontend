@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/doooolphin/frontend#readme",
   "dependencies": {
+    "@emotion/css": "^11.9.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
