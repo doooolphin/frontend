@@ -6,6 +6,7 @@ import TestEmotion from './TestEmotion';
 createRoot(document.querySelector('#app')).render(
   <React.StrictMode>
     <Main />
-    <TestEmotion />
+    <TestEmotion>안녕하세요</TestEmotion>
+    <TestEmotion primary>안녕하세요 props입니다</TestEmotion>
   </React.StrictMode>
 );
