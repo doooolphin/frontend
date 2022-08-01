@@ -17,10 +17,17 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended"
   ],
+  "plugins": ["@emotion"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "no-undef": "off"
+    "no-undef": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "@emotion/pkg-renaming": "error",
+    "@emotion/no-vanilla": "error",
+    "@emotion/import-from-emotion": "error",
+    "@emotion/styled-import": "error"
   },
   "settings": {
     "react": {

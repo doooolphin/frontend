@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
@@ -23,12 +22,12 @@ const config = {
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
   },
   output: {
+    clean: true,
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].js',
     publicPath: '/'
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       minify: isProduction,
       template: './index.html'
@@ -49,9 +48,9 @@ const config = {
                 debug: !isProduction
               }
             ],
-            '@babel/preset-react'
+            ['@babel/preset-react', { runtime: 'automatic', importSource: '@emotion/react' }]
           ],
-          plugins: isProduction ? [] : ['react-refresh/babel']
+          plugins: [isProduction ? '' : 'react-refresh/babel', '@emotion']
         }
       },
       {
@@ -86,9 +85,6 @@ const config = {
   devServer: {
     historyApiFallback: true,
     port: 3000,
-    devMiddleware: {
-      writeToDisk: true
-    },
     hot: true,
     open: true
   }
