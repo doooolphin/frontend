@@ -84,6 +84,7 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
+    static: 'public',
     port: 3000,
     hot: true,
     open: true
