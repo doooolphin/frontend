@@ -1,10 +1,9 @@
-import Header from '../../components/Common/Header';
+import Header from '@components/Common/Header';
 
 export default {
   title: 'Doolphin/Header',
   component: Header,
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen'
   }
 };
