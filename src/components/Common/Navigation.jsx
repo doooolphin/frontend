@@ -12,6 +12,10 @@ const FooterWrapper = styled.footer`
   z-index: 300;
   box-shadow: 0px -1px 8px 1px rgba(0, 0, 0, 0.05);
   border-radius: 10px 10px 0px 0px;
+  display: flex;
+  align-items: end;
+  padding: 10px;
+  justify-content: space-around;
 `;
 
 const Button = styled.button`
@@ -21,35 +25,25 @@ const Button = styled.button`
 const Footer = () => {
   return (
     <FooterWrapper>
-      <div
+      <Button>
+        <img src="/search.png" alt="검색" />
+      </Button>
+      <Button>
+        <img src="/like.png" alt="찜" />
+      </Button>
+      <Button
         css={css`
-          display: flex;
-          align-items: end;
-          padding: 10px;
-          justify-content: space-around;
-          height: 100%;
+          width: 60px;
         `}
       >
-        <Button>
-          <img src="/search.png" alt="검색" />
-        </Button>
-        <Button>
-          <img src="/like.png" alt="찜" />
-        </Button>
-        <Button
-          css={css`
-            width: 60px;
-          `}
-        >
-          <img src="/logo.png" alt="홈" />
-        </Button>
-        <Button>
-          <img src="/order.png" alt="주문" />
-        </Button>
-        <Button>
-          <img src="/my.png" alt="마이" />
-        </Button>
-      </div>
+        <img src="/logo.png" alt="홈" />
+      </Button>
+      <Button>
+        <img src="/order.png" alt="주문" />
+      </Button>
+      <Button>
+        <img src="/my.png" alt="마이" />
+      </Button>
     </FooterWrapper>
   );
 };
