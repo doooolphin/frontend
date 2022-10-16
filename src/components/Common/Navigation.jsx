@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const FooterWrapper = styled.footer`
+const Wrapper = styled.footer`
   position: fixed;
   height: 60px;
   bottom: 0;
@@ -22,9 +22,9 @@ const Button = styled.button`
   width: 40px;
 `;
 
-const Footer = () => {
+const Navigation = () => {
   return (
-    <FooterWrapper>
+    <Wrapper>
       <Button>
         <img src="/search.png" alt="검색" />
       </Button>
@@ -44,8 +44,8 @@ const Footer = () => {
       <Button>
         <img src="/my.png" alt="마이" />
       </Button>
-    </FooterWrapper>
+    </Wrapper>
   );
 };
 
-export default Footer;
+export default Navigation;
