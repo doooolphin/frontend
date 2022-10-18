@@ -12,7 +12,7 @@ const HeaderWrapper = styled.header`
   left: 0;
   right: 0;
   width: 100%;
-  background-color: ${(props) => (props.main ? '#c275cf' : '#ffffff')};
+  background-color: ${(props) => (props.main ? '#AC4AC4' : '#ffffff')};
   color: ${(props) => (props.main ? '#ffffff' : '#000000')};
   z-index: 300;
   display: flex;

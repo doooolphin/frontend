@@ -9,6 +9,7 @@ const InfoButton = ({ onClick }) => {
         width: 30px;
       `}
       onClick={onClick}
+      aria-label="info"
     >
       <img src="/info.png" alt="마이" />
     </button>

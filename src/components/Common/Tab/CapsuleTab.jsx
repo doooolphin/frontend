@@ -21,9 +21,9 @@ const Capsule = styled.button`
   &:first-child {
     margin-left: 10px;
   }
-  color: ${(props) => (props.active ? '#ffffff' : '#949292')};
+  color: ${(props) => (props.active ? '#ffffff' : '#797676')};
   font-weight: ${(props) => (props.active ? 600 : 'unset')};
-  background-color: ${(props) => (props.active ? '#c275cf' : '#ffffff')};
+  background-color: ${(props) => (props.active ? '#AC4AC4' : '#ffffff')};
 `;
 
 const CapsuleTab = ({ categorys, onClick }) => {
@@ -32,6 +32,7 @@ const CapsuleTab = ({ categorys, onClick }) => {
       {categorys.map((category) => (
         <Capsule
           role="tab"
+          aria-label={category.name}
           aria-selected={category.active}
           active={category.active}
           key={category.code}

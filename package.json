@@ -8,13 +8,17 @@
     "serve": "webpack serve",
     "lint": "eslint src/*",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test-storybook": "test-storybook",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/doooolphin/frontend.git"
   },
-  "author": "doooolphin",
+  "author": {
+    "name": "doooolphin"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/doooolphin/frontend/issues"
@@ -34,6 +38,7 @@
     "@babel/preset-react": "^7.18.6",
     "@emotion/eslint-plugin": "^11.10.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@storybook/addon-a11y": "^6.5.12",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
@@ -41,11 +46,15 @@
     "@storybook/builder-webpack5": "^6.5.9",
     "@storybook/manager-webpack5": "^6.5.9",
     "@storybook/react": "^6.5.9",
+    "@storybook/test-runner": "^0.9.0",
     "@storybook/testing-library": "0.0.13",
+    "axe-playwright": "^1.1.11",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.10.2",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
+    "cypress": "^10.10.0",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.1.0",
@@ -55,6 +64,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "msw": "^0.44.2",
     "prettier": "^2.7.1",
+    "prop-types": "^15.8.1",
     "react-refresh": "^0.14.0",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
@@ -63,10 +73,11 @@
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2",
-    "workbox-webpack-plugin": "^6.5.3",
-    "prop-types": "^15.8.1"
+    "workbox-webpack-plugin": "^6.5.3"
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "frontend@1.0.0"
 }
