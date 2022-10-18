@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Cypress run
-        run: npm run cypress
         uses: cypress-io/github-action@v2
         with:
           start: npm run serve
+          config-file: cypress-config.json
