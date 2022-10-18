@@ -23,25 +23,42 @@ const Button = styled.button`
 `;
 
 const Navigation = () => {
+  const onClickSearch = () => {
+    //TODO:
+  };
+  const onClickLike = () => {
+    //TODO:
+  };
+  const onClickHome = () => {
+    //TODO:
+  };
+  const onClickOrder = () => {
+    //TODO:
+  };
+  const onClickMy = () => {
+    //TODO:
+  };
+
   return (
     <Wrapper>
-      <Button>
+      <Button onClick={onClickSearch}>
         <img src="/search.png" alt="검색" />
       </Button>
-      <Button>
+      <Button onClick={onClickLike}>
         <img src="/like.png" alt="찜" />
       </Button>
       <Button
+        onClick={onClickHome}
         css={css`
           width: 60px;
         `}
       >
         <img src="/logo.png" alt="홈" />
       </Button>
-      <Button>
+      <Button onClick={onClickOrder}>
         <img src="/order.png" alt="주문" />
       </Button>
-      <Button>
+      <Button onClick={onClickMy}>
         <img src="/my.png" alt="마이" />
       </Button>
     </Wrapper>

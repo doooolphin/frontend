@@ -43,13 +43,32 @@ const Address = styled.div`
       fill: ${(props) => (props.main ? '#ffffff' : '#323232')};
     }
   }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Header = ({ main, address, hasNotice }) => {
+  const onClickAddress = () => {
+    //TODO:
+  };
+  const onClickBack = () => {
+    //TODO:
+  };
+  const onClickMenu = () => {
+    //TODO:
+  };
+  const onClickNotice = () => {
+    //TODO:
+  };
+  const onClickInfo = () => {
+    //TODO:
+  };
+
   return (
     <HeaderWrapper main={main}>
-      <div>{main ? <MenuButton /> : <BackButton />}</div>
-      <Address main={main}>
+      <div>{main ? <MenuButton onClick={onClickMenu} /> : <BackButton onClick={onClickBack} />}</div>
+      <Address main={main} onClick={onClickAddress}>
         <span>{address}</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -61,8 +80,8 @@ const Header = ({ main, address, hasNotice }) => {
       <div>
         {main && (
           <>
-            <NoticeButton hasNotice={hasNotice} />
-            <InfoButton />
+            <NoticeButton hasNotice={hasNotice} onClick={onClickNotice} />
+            <InfoButton onClick={onClickInfo} />
           </>
         )}
       </div>
@@ -72,7 +91,8 @@ const Header = ({ main, address, hasNotice }) => {
 
 Header.propTypes = {
   main: PropTypes.bool,
-  address: PropTypes.string,
+  address: PropTypes.string.isRequired,
   hasNotice: PropTypes.bool
 };
+
 export default Header;
