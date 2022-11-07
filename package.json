@@ -50,7 +50,7 @@
     "@storybook/testing-library": "0.0.13",
     "axe-playwright": "^1.1.11",
     "babel-loader": "^8.2.5",
-    "chromatic": "^6.10.2",
+    "chromatic": "^6.11.4",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
