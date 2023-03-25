@@ -22,7 +22,7 @@ const Button = styled.button`
   width: 40px;
 `;
 
-const Navigation = () => {
+const Footer = ({ ...props }) => {
   const onClickSearch = () => {
     //TODO:
   };
@@ -40,7 +40,7 @@ const Navigation = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <Button onClick={onClickSearch}>
         <img src="/search.png" alt="검색" />
       </Button>
@@ -65,4 +65,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Footer;

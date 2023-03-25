@@ -1,11 +1,11 @@
 import Header from '@components/Common/Header';
-import Navigation from '@components/Common/Navigation';
+import Footer from '@components/Common/Footer';
 import PropTypes from 'prop-types';
 
 const Layout = ({ main, address, hasNotice }) => (
   <>
     <Header address={address} main={main} hasNotice={hasNotice} />
-    <Navigation />
+    <Footer />
   </>
 );
 

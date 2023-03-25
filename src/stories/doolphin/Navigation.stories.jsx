@@ -1,11 +1,11 @@
-import Navigation from '@components/Common/Navigation';
+import Footer from '@components/Common/Footer';
 
 export default {
-  title: 'Doolphin/Navigation',
-  component: Navigation,
+  title: 'Doolphin/Footer',
+  component: Footer,
   parameters: {
     layout: 'fullscreen'
   }
 };
 
-export const Default = <Navigation />;
+export const Default = <Footer />;

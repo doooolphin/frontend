@@ -48,7 +48,11 @@ const Address = styled.div`
   }
 `;
 
-const Header = ({ main, address, hasNotice }) => {
+const Title = styled.h2`
+  font-size: 17px;
+`;
+
+const Header = ({ main, title, address, hasNotice, ...props }) => {
   const onClickAddress = () => {
     //TODO:
   };
@@ -66,17 +70,22 @@ const Header = ({ main, address, hasNotice }) => {
   };
 
   return (
-    <HeaderWrapper main={main}>
+    <HeaderWrapper main={main} {...props}>
       <div>{main ? <MenuButton onClick={onClickMenu} /> : <BackButton onClick={onClickBack} />}</div>
-      <Address main={main} onClick={onClickAddress}>
-        <span>{address}</span>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M8.11997 9.29L12 13.17L15.88 9.29C16.27 8.9 16.9 8.9 17.29 9.29C17.68 9.68 17.68 10.31 17.29 10.7L12.7 15.29C12.31 15.68 11.68 15.68 11.29 15.29L6.69997 10.7C6.30997 10.31 6.30997 9.68 6.69997 9.29C7.08997 8.91 7.72997 8.9 8.11997 9.29Z"
-            fill="#323232"
-          />
-        </svg>
-      </Address>
+      {title ? (
+        <Title>{title}</Title>
+      ) : (
+        <Address main={main} onClick={onClickAddress}>
+          <span>{address}</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M8.11997 9.29L12 13.17L15.88 9.29C16.27 8.9 16.9 8.9 17.29 9.29C17.68 9.68 17.68 10.31 17.29 10.7L12.7 15.29C12.31 15.68 11.68 15.68 11.29 15.29L6.69997 10.7C6.30997 10.31 6.30997 9.68 6.69997 9.29C7.08997 8.91 7.72997 8.9 8.11997 9.29Z"
+              fill="#323232"
+            />
+          </svg>
+        </Address>
+      )}
+
       <div>
         {main && (
           <>
@@ -91,7 +100,8 @@ const Header = ({ main, address, hasNotice }) => {
 
 Header.propTypes = {
   main: PropTypes.bool,
-  address: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  address: PropTypes.string,
   hasNotice: PropTypes.bool
 };
 
