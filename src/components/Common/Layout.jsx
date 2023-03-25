@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Header from '@components/Common/Header';
-import Navigation from '@components/Common/Navigation';
+import Footer from '@components/Common/Footer';
 import { width } from '@styles/common';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -22,19 +22,21 @@ const widthStyle = css`
   margin: 0 auto;
 `;
 
-const Layout = ({ header, children }) => {
+const Layout = ({ header, footer, title, children }) => {
   return (
     <Container css={widthStyle}>
-      {header || <Header css={widthStyle} />}
+      {header ?? <Header css={widthStyle} title={title} />}
       <Inner>{children}</Inner>
-      <Navigation css={widthStyle} />
+      {footer ?? <Footer css={widthStyle} />}
     </Container>
   );
 };
 
 Layout.propTypes = {
   header: PropTypes.node,
-  children: PropTypes.node
+  footer: PropTypes.node,
+  children: PropTypes.node,
+  title: PropTypes.string
 };
 
 export default Layout;

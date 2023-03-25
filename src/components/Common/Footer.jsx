@@ -22,7 +22,7 @@ const Button = styled.button`
   width: 40px;
 `;
 
-const Navigation = ({ ...props }) => {
+const Footer = ({ ...props }) => {
   const onClickSearch = () => {
     //TODO:
   };
@@ -65,4 +65,4 @@ const Navigation = ({ ...props }) => {
   );
 };
 
-export default Navigation;
+export default Footer;
