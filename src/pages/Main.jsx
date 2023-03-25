@@ -9,6 +9,7 @@ const Main = () => {
         <Header
           css={css`
             max-width: inherit;
+            min-width: inherit;
             margin: 0 auto;
           `}
           main
