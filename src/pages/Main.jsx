@@ -1,12 +1,24 @@
 import Header from '@components/Common/Header';
-import Navigation from '@components/Common/Navigation';
+import { css } from '@emotion/react';
+import Layout from '@components/Common/Layout';
 
 const Main = () => {
   return (
-    <>
-      <Header main hasNotice address="It's alright~ 우리집으로 가자~" />
-      <Navigation />
-    </>
+    <Layout
+      header={
+        <Header
+          css={css`
+            max-width: inherit;
+            margin: 0 auto;
+          `}
+          main
+          hasNotice
+          address="It's alright~ 우리집으로 가자~"
+        />
+      }
+    >
+      메인!
+    </Layout>
   );
 };
 

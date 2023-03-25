@@ -48,7 +48,7 @@ const Address = styled.div`
   }
 `;
 
-const Header = ({ main, address, hasNotice }) => {
+const Header = ({ main, address, hasNotice, ...props }) => {
   const onClickAddress = () => {
     //TODO:
   };
@@ -66,7 +66,7 @@ const Header = ({ main, address, hasNotice }) => {
   };
 
   return (
-    <HeaderWrapper main={main}>
+    <HeaderWrapper main={main} {...props}>
       <div>{main ? <MenuButton onClick={onClickMenu} /> : <BackButton onClick={onClickBack} />}</div>
       <Address main={main} onClick={onClickAddress}>
         <span>{address}</span>
