@@ -99,15 +99,15 @@ const menuList = ({ menuList }) => {
         <MenuWrap key={list.code}>
           <FoodWrap>
             <MainImage idx={list.image.length}>
-              <Img src={list.image[0]} />
+              <Img src={list.image[0]} alt={list.image[0]} />
             </MainImage>
             {list.image.length > 1 ? (
               <FoodSubWrap>
                 <SubImage>
-                  <Img src={list.image[1]} />
+                  <Img src={list.image[1]} alt={list.image[1]} />
                 </SubImage>
                 <SubImage>
-                  <Img src={list.image[2]} />
+                  <Img src={list.image[2]} alt={list.image[2]} />
                 </SubImage>
               </FoodSubWrap>
             ) : null}
