@@ -28,7 +28,7 @@ const FoodSubWrap = styled.div`
   height: 100%;
   flex: 1;
   justify-content: space-between;
-  border-left: 1px solid #ffffff;
+  margin-left: 1px;
 `;
 const SubImage = styled.div`
   flex: 1;
