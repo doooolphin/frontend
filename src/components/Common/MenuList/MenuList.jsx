@@ -8,6 +8,7 @@ const MenuWrap = styled.div`
   border-radius: 10px;
 `;
 const FoodWrap = styled.div`
+  display: flex;
   width: 100%;
   height: 120px;
   border-radius: 10px 10px 0 0;
@@ -18,20 +19,20 @@ const Img = styled.img`
   height: 100%;
 `;
 const MainImage = styled.div`
-  width: ${(props) => (props.idx > 1 ? '70%' : '100%')};
-  float: left;
+  flex: ${(props) => (props.idx > 1 ? 2 : 1)};
   height: 100%;
 `;
 const FoodSubWrap = styled.div`
-  float: right;
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 29%;
+  flex: 1;
   justify-content: space-between;
+  margin-left: 1px;
 `;
 const SubImage = styled.div`
-  height: 49%;
+  flex: 1;
+  margin-bottom: ${(props) => (props.isTop ? '1px' : 'none')};
 `;
 const FoodContentWrap = styled.div`
   display: flex;
@@ -101,16 +102,16 @@ const menuList = ({ menuList }) => {
             <MainImage idx={list.image.length}>
               <Img src={list.image[0]} alt={list.image[0]} />
             </MainImage>
-            {list.image.length > 1 ? (
+            {list.image.length > 1 && (
               <FoodSubWrap>
-                <SubImage>
+                <SubImage isTop={true}>
                   <Img src={list.image[1]} alt={list.image[1]} />
                 </SubImage>
                 <SubImage>
                   <Img src={list.image[2]} alt={list.image[2]} />
                 </SubImage>
               </FoodSubWrap>
-            ) : null}
+            )}
           </FoodWrap>
           <FoodContentWrap>
             <Content>
