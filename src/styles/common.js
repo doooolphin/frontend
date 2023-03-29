@@ -1,5 +1,8 @@
 const color = {
   primary: '#AC4AC4',
+  aaa: '#aaaaaa',
+  bbb: '#bbbbbb',
+  ccc: '#cccccc',
   white: '#ffffff'
 };
 
