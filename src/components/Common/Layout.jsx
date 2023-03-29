@@ -12,8 +12,11 @@ const Container = styled.div`
 `;
 
 const Inner = styled.div`
-  padding-top: 50px;
-  padding-bottom: 70px;
+  padding: 50px 30px 70px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 `;
 
 const widthStyle = css`
