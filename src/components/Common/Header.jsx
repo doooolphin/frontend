@@ -4,7 +4,6 @@ import BackButton from './Button/BackButton';
 import InfoButton from './Button/InfoButton';
 import MenuButton from './Button/MenuButton';
 import NoticeButton from './Button/NoticeButton';
-import { useNavigate } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -54,14 +53,11 @@ const Title = styled.h2`
 `;
 
 const Header = ({ main, title, address, hasNotice, ...props }) => {
-  const navigate = useNavigate();
-
   const onClickAddress = () => {
     //TODO:
   };
   const onClickBack = () => {
     //TODO:
-    navigate(-1);
   };
   const onClickMenu = () => {
     //TODO:
