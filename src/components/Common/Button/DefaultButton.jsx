@@ -6,7 +6,7 @@ const LoginBtn = styled.button`
   color: #ffffff;
   width: 500px;
   height: 70px;
-  border-radius: 5px;
+  border-radius: ${(props) => (props.radius === '0' ? '0px' : '5px')};
   font-size: 20px;
   font-weight: bold;
   width: 100%;
@@ -14,7 +14,7 @@ const LoginBtn = styled.button`
 
 const DefaultButton = (props) => {
   return (
-    <LoginBtn onClick={props.onClickNext} isChkTrue={props.isChkTrue}>
+    <LoginBtn onClick={props.onClickNext || props.onClickRequest} isChkTrue={props.isChkTrue} radius={props.radius}>
       {props.text}
     </LoginBtn>
   );
@@ -22,7 +22,9 @@ const DefaultButton = (props) => {
 
 DefaultButton.propTypes = {
   text: PropTypes.string,
+  radius: PropTypes.string,
   onClickNext: PropTypes.func,
+  onClickRequest: PropTypes.func,
   isChkTrue: PropTypes.boolean
 };
 
