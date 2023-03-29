@@ -19,7 +19,7 @@ const Img = styled.img`
   height: 100%;
 `;
 const MainImage = styled.div`
-  flex: ${(props) => (props.idx > 1 ? 2 : 3)};
+  flex: ${(props) => (props.idx > 1 ? 2 : 1)};
   height: 100%;
 `;
 const FoodSubWrap = styled.div`
@@ -100,15 +100,15 @@ const menuList = ({ menuList }) => {
         <MenuWrap key={list.code}>
           <FoodWrap>
             <MainImage idx={list.image.length}>
-              <Img src={list.image[0]} />
+              <Img src={list.image[0]} alt={list.image[0]} />
             </MainImage>
             {list.image.length > 1 && (
               <FoodSubWrap>
                 <SubImage isTop={true}>
-                  <Img src={list.image[1]} />
+                  <Img src={list.image[1]} alt={list.image[1]} />
                 </SubImage>
                 <SubImage>
-                  <Img src={list.image[2]} />
+                  <Img src={list.image[2]} alt={list.image[2]} />
                 </SubImage>
               </FoodSubWrap>
             )}
