@@ -1,19 +1,18 @@
+import DefaultButton from '@components/Common/Button/DefaultButton';
 import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const HeadWrapper = styled.div`
-  height: 500px;
+  height: 400px;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
-  padding: 30px;
-  margin-top: 30px;
 `;
 const FootWrapper = styled.div`
-  height: 200px;
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  padding: 30px;
 `;
 const SubWrapper = styled.div`
   flex: 1;
@@ -28,16 +27,6 @@ const Input = styled.input`
   flex: 1 1;
   height: 60px;
   font-size: 20px;
-`;
-const LoginBtn = styled.button`
-  background: #ac4ac4;
-  color: #ffffff;
-  width: 500px;
-  height: 70px;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  flex: 1 1;
 `;
 const FindSpan = styled.button`
   margin: 0 20px;
@@ -67,18 +56,39 @@ const Img = styled.img`
   display: inline;
   margin-right: ${(props) => (props.isNaver ? '10px' : '5px')};
 `;
+
 const SignIn = () => {
+  const navigate = useNavigate();
+  const [inputId, setInputId] = useState('');
+  const [inputPw, setInputPw] = useState('');
+  const [isChkTrue, setIsChkTrue] = useState(false);
+  const onChangeId = (event) => {
+    setInputId(event.target.value);
+    if (event.target.value && inputPw) {
+      setIsChkTrue(true);
+    } else {
+      setIsChkTrue(false);
+    }
+  };
+  const onChangePw = (event) => {
+    setInputPw(event.target.value);
+    if (event.target.value && inputId) {
+      setIsChkTrue(true);
+    } else {
+      setIsChkTrue(false);
+    }
+  };
   return (
-    <Layout inner={<></>} title="로그인">
+    <Layout inner={<></>} footer={false} title="로그인">
       <HeadWrapper>
         <SubWrapper>
-          <Input placeholder="아이디" />
+          <Input placeholder="아이디" onChange={onChangeId} />
         </SubWrapper>
         <SubWrapper>
-          <Input placeholder="비밀번호" type="password" />
+          <Input placeholder="비밀번호" type="password" onChange={onChangePw} />
         </SubWrapper>
         <SubWrapper>
-          <LoginBtn>로그인</LoginBtn>
+          <DefaultButton text="로그인" inputId={inputId} isChkTrue={isChkTrue} />
         </SubWrapper>
         <SubWrapper>
           <FindSpan>아이디 찾기</FindSpan> | <FindSpan>비밀번호 찾기</FindSpan>
@@ -94,7 +104,7 @@ const SignIn = () => {
           네이버로 로그인
         </ApiLoginBtn>
         <SignUp>
-          혹시, 돌핀이 처음이신가요? <SignUpBtn>회원가입</SignUpBtn>
+          혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up-agreement')}>회원가입</SignUpBtn>
         </SignUp>
       </FootWrapper>
     </Layout>
