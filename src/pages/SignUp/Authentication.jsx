@@ -186,7 +186,7 @@ const SignUpAuthentication = () => {
     setIsTelFocus(true);
   };
   return (
-    <Layout title="회원가입">
+    <Layout footer={false} title="회원가입">
       <H1>
         서비스의 안전한 사용을 위해
         <br />
