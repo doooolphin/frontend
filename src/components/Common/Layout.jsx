@@ -15,8 +15,7 @@ const Inner = styled.div`
   padding: 50px 30px 70px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: ${(props) => (props.component === 'signUpAuth' ? 'none' : '100vh')};
+  height: 100vh;
 `;
 
 const widthStyle = css`
@@ -25,11 +24,11 @@ const widthStyle = css`
   margin: 0 auto;
 `;
 
-const Layout = ({ header, footer, title, children, component }) => {
+const Layout = ({ header, footer, title, children }) => {
   return (
     <Container css={widthStyle}>
       {header ?? <Header css={widthStyle} title={title} />}
-      <Inner component={component}>{children}</Inner>
+      <Inner>{children}</Inner>
       {footer ?? <Footer css={widthStyle} />}
     </Container>
   );
