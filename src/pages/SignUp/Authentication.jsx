@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { color } from '@styles/common';
-import { useRef, useState } from 'react';
+import { memo, useMemo, useRef, useState } from 'react';
 
 const SubWrapper = styled.div`
   flex: 1;
@@ -110,81 +110,65 @@ const SignUpAuthentication = () => {
   const nameRef = useRef(null);
   const birthRef = useRef(null);
   const telRef = useRef(null);
-  const [isNameFocus, setIsNameFocus] = useState(false);
-  const [isBirthFocus, setIsBirthFocus] = useState(false);
-  const [isTelFocus, setIsTelFocus] = useState(false);
+
+  const [info, setInfo] = useState({
+    name: '',
+    birth: '',
+    tel: '',
+    isLocal: true,
+    isMan: true
+  });
+
   const [nameBtnState, setNameBtnState] = useState(false);
   const [birthBtnState, setBirthBtnState] = useState(false);
-  const [nameBtn, setNameBtn] = useState(true);
-  const [birthBtn, setBirthBtn] = useState(true);
-  const [nameInput, setNameInput] = useState('');
-  const [birthInput, setBirthInput] = useState('');
-  const [telInput, setTelInput] = useState('');
-  const [requestBtn, setrequestBtn] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
+  const [activeInfo, setActiveInfo] = useState(0);
+
   const onClickSubWrapper = (idx) => {
+    setActiveInfo(idx);
     if (idx === 1) {
       nameRef.current.focus();
-      setIsNameFocus(true);
-      setNameBtnState(true);
+      !nameBtnState && setNameBtnState(true);
     } else if (idx === 2) {
       birthRef.current.focus();
-      setIsBirthFocus(true);
-      setBirthBtnState(true);
+      !birthBtnState && setBirthBtnState(true);
     } else {
       telRef.current.focus();
-      setIsTelFocus(true);
     }
   };
 
-  const onToggleName = (nameBool) => {
-    if (nameBool) {
-      // 내국인이면
-      setNameBtn(true);
-    } else {
-      // 외국인이면
-      setNameBtn(false);
-    }
-  };
-
-  const onToggleBirth = (nameBool) => {
-    if (nameBool) {
-      // 남 이면
-      setBirthBtn(true);
-    } else {
-      // 여 이면
-      setBirthBtn(false);
-    }
+  const setInfoState = (value) => {
+    setInfo({
+      ...info,
+      ...value
+    });
   };
 
   const onChangeNameInput = (event) => {
-    setNameInput(event.target.value);
-    if (event.target.value && birthInput && telInput) setrequestBtn(true);
-    else {
-      setrequestBtn(false);
-    }
+    setInfoState({
+      name: event.target.value
+    });
   };
 
   const onChangeBirthInput = (event) => {
-    setBirthInput(event.target.value);
-    if (event.target.value && nameInput && telInput) setrequestBtn(true);
-    else {
-      setrequestBtn(false);
-    }
+    setInfoState({
+      birth: event.target.value
+    });
   };
 
   const onChangeTelInput = (event) => {
-    setTelInput(event.target.value);
-    if (event.target.value && birthInput && nameInput) setrequestBtn(true);
-    else {
-      setrequestBtn(false);
-    }
+    setInfoState({
+      tel: event.target.value
+    });
   };
 
   const onClickRequest = () => {
     setIsRequest(true);
     setIsTelFocus(true);
   };
+
+  const isAbleRequest = useMemo(() => info.birth && info.name && info.tel, [info]);
+
   return (
     <Layout footer={false} title="회원가입">
       <H1>
@@ -195,7 +179,7 @@ const SignUpAuthentication = () => {
       <MidWrapper>
         <SubWrapper
           css={
-            isNameFocus
+            activeInfo === 1
               ? borderColor
               : null ||
                 (isRequest &&
@@ -206,25 +190,32 @@ const SignUpAuthentication = () => {
           onClick={() => onClickSubWrapper(1)}
         >
           <SideWrapper isLeft={true}>
-            <NameText css={isNameFocus ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 1 ? textColor : null} isRequest={isRequest}>
               이름
             </NameText>
-            <Input
-              ref={nameRef}
-              onBlur={() => {
-                setIsNameFocus(false);
-              }}
-              onChange={onChangeNameInput}
-              isRequest={isRequest}
-            />
+            <Input ref={nameRef} value={info.name} onChange={onChangeNameInput} isRequest={isRequest} />
           </SideWrapper>
           <SideWrapper>
             {nameBtnState && (
               <>
-                <NameBtn onClick={() => onToggleName(true)} css={nameBtn ? btnPrimaryColor : btnWhiteColor}>
+                <NameBtn
+                  onClick={() =>
+                    setInfoState({
+                      isLocal: true
+                    })
+                  }
+                  css={info.isLocal ? btnPrimaryColor : btnWhiteColor}
+                >
                   내국인
                 </NameBtn>
-                <NameBtn onClick={() => onToggleName(false)} css={nameBtn ? btnWhiteColor : btnPrimaryColor}>
+                <NameBtn
+                  onClick={() =>
+                    setInfoState({
+                      isLocal: false
+                    })
+                  }
+                  css={!info.isLocal ? btnPrimaryColor : btnWhiteColor}
+                >
                   외국인
                 </NameBtn>
               </>
@@ -233,7 +224,7 @@ const SignUpAuthentication = () => {
         </SubWrapper>
         <SubWrapper
           css={
-            isBirthFocus
+            activeInfo === 2
               ? borderColor
               : null ||
                 (isRequest &&
@@ -244,43 +235,53 @@ const SignUpAuthentication = () => {
           onClick={() => onClickSubWrapper(2)}
         >
           <SideWrapper isLeft={true}>
-            <NameText css={isBirthFocus ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 2 ? textColor : null} isRequest={isRequest}>
               생년월일
             </NameText>
             <Input
               placeholder="YYYYMMDD"
               ref={birthRef}
-              onBlur={() => {
-                setIsBirthFocus(false);
-              }}
               onChange={onChangeBirthInput}
+              value={info.birth}
               isRequest={isRequest}
             />
           </SideWrapper>
           <SideWrapper>
             {birthBtnState && (
               <>
-                <NameBtn onClick={() => onToggleBirth(true)} css={birthBtn ? btnPrimaryColor : btnWhiteColor}>
+                <NameBtn
+                  onClick={() =>
+                    setInfoState({
+                      isMan: true
+                    })
+                  }
+                  css={info.isMan ? btnPrimaryColor : btnWhiteColor}
+                >
                   남
                 </NameBtn>
-                <NameBtn onClick={() => onToggleBirth(false)} css={birthBtn ? btnWhiteColor : btnPrimaryColor}>
+                <NameBtn
+                  onClick={() =>
+                    setInfoState({
+                      isMan: false
+                    })
+                  }
+                  css={!info.isMan ? btnPrimaryColor : btnWhiteColor}
+                >
                   여
                 </NameBtn>
               </>
             )}
           </SideWrapper>
         </SubWrapper>
-        <SubWrapper isLast={true} css={isTelFocus ? borderColor : null} onClick={() => onClickSubWrapper(3)}>
+        <SubWrapper isLast={true} css={activeInfo === 3 ? borderColor : null} onClick={() => onClickSubWrapper(3)}>
           <SideWrapper isLeft={true}>
-            <NameText css={isTelFocus ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 3 ? textColor : null} isRequest={isRequest}>
               휴대전화 번호
             </NameText>
             <Input
               ref={telRef}
-              onBlur={() => {
-                setIsTelFocus(false);
-              }}
               onChange={onChangeTelInput}
+              value={info.tel}
               readOnly={isRequest}
               isRequest={isRequest}
             />
@@ -298,9 +299,11 @@ const SignUpAuthentication = () => {
           )}
         </SubWrapper>
       </MidWrapper>
-      {requestBtn && <DefaultButton text="인증번호 요청" isChkTrue={true} radius="0" onClickRequest={onClickRequest} />}
+      {isAbleRequest && (
+        <DefaultButton text="인증번호 요청" isChkTrue={true} radius="0" onClickRequest={onClickRequest} />
+      )}
     </Layout>
   );
 };
 
-export default SignUpAuthentication;
+export default memo(SignUpAuthentication);

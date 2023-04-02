@@ -8,8 +8,8 @@ const reset = css`
     color: inherit;
   }
   *,
-  :after,
-  :before {
+  ::after,
+  ::before {
     box-sizing: border-box;
     flex-shrink: 0;
   }
