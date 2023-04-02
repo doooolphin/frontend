@@ -17,7 +17,8 @@ const SubWrapper = styled.div`
   font-size: 18px;
   justify-content: space-between;
   width: 100%;
-  border-bottom: ${(props) => (props.isAll ? '1px solid #bbb;' : 'none')};
+  border-bottom: ${(props) => (props.isAll ? '1px solid' : 'none')};
+  border-color: ${color.gray};
 `;
 const H1 = styled.div`
   font-size: 2em;
@@ -41,7 +42,7 @@ const Label = styled.label`
   cursor: pointer;
 `;
 const RightArror = styled(RightOutlined)`
-  color: #aaa;
+  color: ${color.gray};
   cursor: pointer;
 `;
 const AllAgreeText = styled.span`
@@ -65,34 +66,28 @@ const SignUp = () => {
 
   // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
-  // 필수가 모두 선택되었는지 boolean 값 반환
-  const [isChkTrue, setIsChkTrue] = useState(false);
+
+  // 필수인 items
+  const filterRequiredItems = (data) => {
+    return data.filter((el) => el.required);
+  };
+
+  // 필수가 모두 체크됐는지?
+  const isRequiredChecked = (data, checkItems) => {
+    const requiredItemList = filterRequiredItems(data);
+    return requiredItemList.every((el) => checkItems.includes(el.id));
+  };
+
+  const isChkTrue = isRequiredChecked(data, checkItems);
 
   // 체크박스 단일 선택
   const handleSingleCheck = (checked, id) => {
-    console.log('매개변수 id === ' + id);
     if (checked) {
       // 단일 선택 시 체크된 아이템을 배열에 추가
       setCheckItems((prev) => [...prev, id]);
-
-      // 필수가 2개 들어있고 매개변수id도 필수이면 true
-      let cnt = 0;
-      for (let i = 0; i < data.length; i++) {
-        for (let j = 0; j < checkItems.length; j++) {
-          if (data[i].id === checkItems[j]) {
-            if (data[i].required) cnt++;
-          }
-        }
-      }
-      for (let i = 0; i < data.length; i++) {
-        if (cnt === 2 && data[i].id === id) {
-          if (data[i].required) setIsChkTrue(true);
-        }
-      }
     } else {
       // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
       setCheckItems(checkItems.filter((el) => el !== id));
-      if (id === 0 || id === 1 || id === 2) setIsChkTrue(false);
     }
   };
 
@@ -100,20 +95,16 @@ const SignUp = () => {
   const handleAllCheck = (checked) => {
     if (checked) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-      const idArray = [];
-      data.forEach((el) => idArray.push(el.id));
-      setCheckItems(idArray);
-      setIsChkTrue(true);
+      setCheckItems(data.map((el) => el.id));
     } else {
       // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
       setCheckItems([]);
-      setIsChkTrue(false);
     }
   };
   const navigate = useNavigate();
 
   const onClickNext = () => {
-    if (isChkTrue) navigate('/sign-up-authentication');
+    if (isChkTrue) navigate('/sign-up/authentication');
   };
 
   return (

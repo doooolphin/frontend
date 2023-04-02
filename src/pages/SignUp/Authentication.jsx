@@ -15,7 +15,7 @@ const SubWrapper = styled.div`
   padding: 10px 20px;
   /* border-bottom: ${(props) => (props.isLast ? '1px solid #bbb;' : 'none !important')}; */
   flex-direction: ${(props) => props.isLast && 'column'};
-  border: 1px solid #bbb;
+  border: 1px solid ${color.lightgray};
 `;
 
 const H1 = styled.div`
@@ -35,7 +35,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   font-size: 14px;
-  color: ${(props) => props.isRequest && '#bbbbbb'};
+  color: ${(props) => props.isRequest && color.lightgray};
 `;
 
 const SideWrapper = styled.div`
@@ -66,11 +66,11 @@ const NameBtn = styled.button`
 
 const NameText = styled.span`
   font-size: 14px;
-  color: ${(props) => props.isRequest && '#bbbbbb'};
+  color: ${(props) => props.isRequest && color.lightgray};
 `;
 
 const AuthNumWrapper = styled.div`
-  border-top: 1px solid #ccc;
+  border-top: 1px solid ${color.lightgray};
   width: 100%;
   padding-top: 15px;
 `;
@@ -103,7 +103,7 @@ const btnPrimaryColor = css`
 
 const btnWhiteColor = css`
   background-color: ${color.white};
-  color: ${color.bbb};
+  color: ${color.gray};
 `;
 
 const SignUpAuthentication = () => {
@@ -186,7 +186,7 @@ const SignUpAuthentication = () => {
     setIsTelFocus(true);
   };
   return (
-    <Layout component="signUpAuth" title="회원가입">
+    <Layout title="회원가입">
       <H1>
         서비스의 안전한 사용을 위해
         <br />
