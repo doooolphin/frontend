@@ -29,9 +29,13 @@ const Input = styled.input`
   font-size: 20px;
 `;
 const FindSpan = styled.button`
-  margin: 0 20px;
   color: #777;
   font-size: 20px;
+  &:before {
+    content: '${(props) => (props.isPw ? '|' : '')}';
+    margin-right: 20px;
+  }
+  ${(props) => (props.isPw ? '' : 'padding-right: 20px;')}
 `;
 const ApiLoginBtn = styled.button`
   border-radius: 5px;
@@ -52,9 +56,9 @@ const SignUpBtn = styled.button`
   color: #ac4ac4;
 `;
 const Img = styled.img`
-  width: ${(props) => (props.isNaver ? '15px' : '20px')};
   display: inline;
-  margin-right: ${(props) => (props.isNaver ? '10px' : '5px')};
+  width: 25px;
+  margin-right: 5px;
 `;
 
 const SignIn = () => {
@@ -91,7 +95,8 @@ const SignIn = () => {
           <DefaultButton text="로그인" inputId={inputId} isChkTrue={isChkTrue} />
         </SubWrapper>
         <SubWrapper>
-          <FindSpan>아이디 찾기</FindSpan> | <FindSpan>비밀번호 찾기</FindSpan>
+          <FindSpan>아이디 찾기</FindSpan>
+          <FindSpan isPw={true}>비밀번호 찾기</FindSpan>
         </SubWrapper>
       </HeadWrapper>
       <FootWrapper>
@@ -100,11 +105,11 @@ const SignIn = () => {
           페이스북으로 로그인
         </ApiLoginBtn>
         <ApiLoginBtn>
-          <Img isNaver={true} src="naver.png" />
+          <Img src="naver.png" />
           네이버로 로그인
         </ApiLoginBtn>
         <SignUp>
-          혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up-agreement')}>회원가입</SignUpBtn>
+          혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up/agreement')}>회원가입</SignUpBtn>
         </SignUp>
       </FootWrapper>
     </Layout>
