@@ -29,6 +29,7 @@ const H1 = styled.div`
 const MidWrapper = styled.span`
   display: flex;
   flex-direction: column;
+  min-height: 250px;
 `;
 
 const Input = styled.input`
@@ -47,7 +48,6 @@ const SideWrapper = styled.div`
   flex-direction: ${(props) => (props.isLeft ? 'column' : 'row')};
   flex: ${(props) => (props.isLeft ? '3' : '1')};
   ${(props) => (props.isLeft ? 'justify-content: center' : 'align-items: center')};
-  margin-bottom: 15px;
   width: 100%;
 `;
 
@@ -86,7 +86,8 @@ const ReBtn = styled.button`
 `;
 
 const ReDiv = styled.div`
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const borderColor = css`
@@ -110,6 +111,7 @@ const SignUpAuthentication = () => {
   const nameRef = useRef(null);
   const birthRef = useRef(null);
   const telRef = useRef(null);
+  const authNumRef = useRef(null);
 
   const [info, setInfo] = useState({
     name: '',
@@ -124,16 +126,16 @@ const SignUpAuthentication = () => {
   const [isRequest, setIsRequest] = useState(false);
   const [activeInfo, setActiveInfo] = useState(0);
 
-  const onClickSubWrapper = (idx) => {
-    setActiveInfo(idx);
-    if (idx === 1) {
+  const onClickSubWrapper = (active) => {
+    setActiveInfo(active);
+    if (active === 'name') {
       nameRef.current.focus();
       !nameBtnState && setNameBtnState(true);
-    } else if (idx === 2) {
+    } else if (active === 'birth') {
       birthRef.current.focus();
       !birthBtnState && setBirthBtnState(true);
     } else {
-      telRef.current.focus();
+      isRequest ? authNumRef.current.focus() : telRef.current.focus();
     }
   };
 
@@ -164,7 +166,6 @@ const SignUpAuthentication = () => {
 
   const onClickRequest = () => {
     setIsRequest(true);
-    setIsTelFocus(true);
   };
 
   const isAbleRequest = useMemo(() => info.birth && info.name && info.tel, [info]);
@@ -179,7 +180,7 @@ const SignUpAuthentication = () => {
       <MidWrapper>
         <SubWrapper
           css={
-            activeInfo === 1
+            activeInfo === 'name'
               ? borderColor
               : null ||
                 (isRequest &&
@@ -187,10 +188,10 @@ const SignUpAuthentication = () => {
                     pointer-events: none;
                   `)
           }
-          onClick={() => onClickSubWrapper(1)}
+          onClick={() => onClickSubWrapper('name')}
         >
           <SideWrapper isLeft={true}>
-            <NameText css={activeInfo === 1 ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 'name' ? textColor : null} isRequest={isRequest}>
               이름
             </NameText>
             <Input ref={nameRef} value={info.name} onChange={onChangeNameInput} isRequest={isRequest} />
@@ -224,7 +225,7 @@ const SignUpAuthentication = () => {
         </SubWrapper>
         <SubWrapper
           css={
-            activeInfo === 2
+            activeInfo === 'birth'
               ? borderColor
               : null ||
                 (isRequest &&
@@ -232,10 +233,10 @@ const SignUpAuthentication = () => {
                     pointer-events: none;
                   `)
           }
-          onClick={() => onClickSubWrapper(2)}
+          onClick={() => onClickSubWrapper('birth')}
         >
           <SideWrapper isLeft={true}>
-            <NameText css={activeInfo === 2 ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 'birth' ? textColor : null} isRequest={isRequest}>
               생년월일
             </NameText>
             <Input
@@ -273,9 +274,13 @@ const SignUpAuthentication = () => {
             )}
           </SideWrapper>
         </SubWrapper>
-        <SubWrapper isLast={true} css={activeInfo === 3 ? borderColor : null} onClick={() => onClickSubWrapper(3)}>
+        <SubWrapper
+          isLast={true}
+          css={activeInfo === 'tel' ? borderColor : null}
+          onClick={() => onClickSubWrapper('tel')}
+        >
           <SideWrapper isLeft={true}>
-            <NameText css={activeInfo === 3 ? textColor : null} isRequest={isRequest}>
+            <NameText css={activeInfo === 'tel' ? textColor : null} isRequest={isRequest}>
               휴대전화 번호
             </NameText>
             <Input
@@ -289,9 +294,10 @@ const SignUpAuthentication = () => {
           {isRequest && (
             <>
               <AuthNumWrapper>
-                <NameText isRequest={isRequest}>인증번호</NameText>{' '}
+                <NameText isRequest={isRequest}>인증번호</NameText>
                 <AuthMessage>인증번호를 보내드렸어요. ( 0분 0초)</AuthMessage>
                 <ReDiv>
+                  <Input ref={authNumRef} />
                   <ReBtn onClickRequest={onClickRequest}>재요청</ReBtn>
                 </ReDiv>
               </AuthNumWrapper>
