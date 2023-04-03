@@ -2,7 +2,7 @@ import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
 import { color } from '@styles/common';
 import { RightOutlined } from '@ant-design/icons';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { useNavigate } from 'react-router-dom';
 
@@ -54,7 +54,12 @@ const MidWrapper = styled.span`
   flex-direction: column;
 `;
 
-const Container = styled.div``;
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const SignUp = () => {
   const [agreementItems, setAgreementItems] = useState([
