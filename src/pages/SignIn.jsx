@@ -69,6 +69,13 @@ const Img = styled.img`
   margin-right: 5px;
 `;
 
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [inputId, setInputId] = useState('');
@@ -92,34 +99,36 @@ const SignIn = () => {
   };
   return (
     <Layout inner={<></>} footer={false} title="로그인">
-      <HeadWrapper>
-        <SubWrapper>
-          <Input placeholder="아이디" onChange={onChangeId} />
-        </SubWrapper>
-        <SubWrapper>
-          <Input placeholder="비밀번호" type="password" onChange={onChangePw} />
-        </SubWrapper>
-        <SubWrapper>
-          <DefaultButton text="로그인" inputId={inputId} isChkTrue={isChkTrue} />
-        </SubWrapper>
-        <SubWrapper>
-          <FindSpan>아이디 찾기</FindSpan>
-          <FindSpan isPw={true}>비밀번호 찾기</FindSpan>
-        </SubWrapper>
-      </HeadWrapper>
-      <FootWrapper>
-        <ApiLoginBtn>
-          <Img src="facebook.png" />
-          페이스북으로 로그인
-        </ApiLoginBtn>
-        <ApiLoginBtn>
-          <Img src="naver.png" />
-          네이버로 로그인
-        </ApiLoginBtn>
-        <SignUp>
-          혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up/agreement')}>회원가입</SignUpBtn>
-        </SignUp>
-      </FootWrapper>
+      <Container>
+        <HeadWrapper>
+          <SubWrapper>
+            <Input placeholder="아이디" onChange={onChangeId} />
+          </SubWrapper>
+          <SubWrapper>
+            <Input placeholder="비밀번호" type="password" onChange={onChangePw} />
+          </SubWrapper>
+          <SubWrapper>
+            <DefaultButton text="로그인" inputId={inputId} isChkTrue={isChkTrue} />
+          </SubWrapper>
+          <SubWrapper>
+            <FindSpan>아이디 찾기</FindSpan>
+            <FindSpan isPw={true}>비밀번호 찾기</FindSpan>
+          </SubWrapper>
+        </HeadWrapper>
+        <FootWrapper>
+          <ApiLoginBtn>
+            <Img src="facebook.png" />
+            페이스북으로 로그인
+          </ApiLoginBtn>
+          <ApiLoginBtn>
+            <Img src="naver.png" />
+            네이버로 로그인
+          </ApiLoginBtn>
+          <SignUp>
+            혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up/agreement')}>회원가입</SignUpBtn>
+          </SignUp>
+        </FootWrapper>
+      </Container>
     </Layout>
   );
 };
