@@ -31,11 +31,19 @@ const Input = styled.input`
 const FindSpan = styled.button`
   color: #777;
   font-size: 20px;
-  &:before {
-    content: '${(props) => (props.isPw ? '|' : '')}';
-    margin-right: 20px;
+
+  &::before {
+    ${(props) =>
+      props.isPw
+        ? `content: '';
+            display: inline-block;
+            width: 1px;
+            height: 18px;
+            background-color: #777;
+            vertical-align: -1px;
+            margin: 0 15px;`
+        : ''}
   }
-  ${(props) => (props.isPw ? '' : 'padding-right: 20px;')}
 `;
 const ApiLoginBtn = styled.button`
   border-radius: 5px;
