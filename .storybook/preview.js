@@ -1,7 +1,9 @@
 import GlobalStyle from '../src/components/Common/GlobalStyle';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 export const decorators = [
+  withRouter,
   (Story) => (
     <>
       <GlobalStyle />
