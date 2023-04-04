@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import BackButton from './Button/BackButton';
@@ -53,11 +54,12 @@ const Title = styled.h2`
 `;
 
 const Header = ({ main, title, address, hasNotice, ...props }) => {
+  const navigate = useNavigate();
   const onClickAddress = () => {
     //TODO:
   };
   const onClickBack = () => {
-    //TODO:
+    navigate(-1);
   };
   const onClickMenu = () => {
     //TODO:

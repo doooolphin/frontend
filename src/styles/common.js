@@ -1,6 +1,8 @@
 const color = {
   primary: '#AC4AC4',
-  white: '#ffffff'
+  white: '#ffffff',
+  darkGray: '#9e9e9e',
+  lightGray: '#F9F9FA'
 };
 
 const width = {
