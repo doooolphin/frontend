@@ -85,7 +85,7 @@ const Card = styled.span`
   height: 16px;
   font-size: 6px;
   margin-right: 5px;
-  color: #e69601;
+  color: #ca8400;
   display: flex;
   justify-content: center;
   align-items: center;
