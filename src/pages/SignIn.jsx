@@ -117,11 +117,11 @@ const SignIn = () => {
         </HeadWrapper>
         <FootWrapper>
           <ApiLoginBtn>
-            <Img src="facebook.png" />
+            <Img src="facebook.png" alt="facebook" />
             페이스북으로 로그인
           </ApiLoginBtn>
           <ApiLoginBtn>
-            <Img src="naver.png" />
+            <Img src="naver.png" alt="naver" />
             네이버로 로그인
           </ApiLoginBtn>
           <SignUp>
