@@ -81,7 +81,7 @@ const Time = styled(FieldTimeOutlined)`
 
 const Card = styled.span`
   ${(props) =>
-    props.cardNm === '쿠폰' ? 'background: #ffebce; color: #b16900;' : 'background: #ffd9ec; color: #df006f;'}
+    props.cardNm === '쿠폰' ? 'background: #ffebce; color: #b16900;' : 'background: #ffd9ec; color: #95004a;'}
   width: 30px;
   height: 16px;
   font-size: 6px;
