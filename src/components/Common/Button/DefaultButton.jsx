@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import { color } from '@styles/common';
 
 const LoginBtn = styled.button`
-  background: ${(props) => (props.isChkTrue ? '#ac4ac4' : '#ddd')};
+  background: ${(props) => (props.isChkTrue ? color.primary : color.lightgray)};
   color: #ffffff;
   width: 500px;
   height: 70px;

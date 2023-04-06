@@ -80,12 +80,12 @@ const Time = styled(FieldTimeOutlined)`
 `;
 
 const Card = styled.span`
-  background: #ffebce;
+  ${(props) =>
+    props.cardNm === '쿠폰' ? 'background: #ffebce; color: #7e4b00;' : 'background: #ffd9ec; color: #8f0035;'}
   width: 30px;
   height: 16px;
   font-size: 6px;
   margin-right: 5px;
-  color: #e69601;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,7 +135,7 @@ const menuList = ({ menuList }) => {
               <Label>{list.distance}</Label>
             </Content>
             <Content>
-              <Card>{list.card}</Card>
+              <Card cardNm={list.card}>{list.card}</Card>
             </Content>
           </FoodContentWrap>
         </MenuWrap>
