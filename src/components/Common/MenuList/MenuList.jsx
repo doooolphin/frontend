@@ -6,7 +6,7 @@ import DeliveryTime from '../Unit/DeliveryTime';
 import DistinctCard from '../Unit/DistinctCard';
 
 const MenuWrap = styled.div`
-  width: 90%;
+  width: 93%;
   margin: 20px auto;
   box-shadow: 1px 5px 8px 0px #eee;
   border-radius: 10px;
@@ -14,7 +14,7 @@ const MenuWrap = styled.div`
 const FoodWrap = styled.div`
   display: flex;
   width: 100%;
-  height: 120px;
+  height: 140px;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 `;
@@ -56,13 +56,14 @@ const Title = styled.div`
   white-space: nowrap;
   width: 55%;
   font-weight: bold;
+  font-size: 18px;
 `;
 const Score = styled.div`
   margin-right: 10px;
   font-weight: bold;
 `;
 const Label = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   margin-right: 5px;
 `;
 const TimeWrap = styled.div`
