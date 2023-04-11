@@ -118,7 +118,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
   `;
   const BreakDown = styled.div`
     font-size: ${fontSize.h2};
-    color: ${color.gray};
+    color: ${color.darkGray};
     font-weight: bold;
     &::after {
       content: '>';
