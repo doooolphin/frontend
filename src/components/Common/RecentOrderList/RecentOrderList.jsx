@@ -18,7 +18,30 @@ const RecentOrderList = ({ orderLists, onClick }) => {
     draggable: true,
     speed: 500,
     slidesToShow: 2,
-    slidesToScroll: 2
+    slidesToScroll: 2,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 6
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 4, // 768px 이상의 화면
+          slidesToScroll: 4
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2, // 480px 이하의 화면
+          slidesToScroll: 2
+        }
+      }
+    ]
   };
 
   const MenuWrap = styled.div`
@@ -54,15 +77,15 @@ const RecentOrderList = ({ orderLists, onClick }) => {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 55%;
     font-weight: bold;
+    font-size: ${fontSize.h1};
+    flex: 1;
   `;
   const Score = styled.div`
-    margin-right: 10px;
     font-weight: bold;
   `;
   const Label = styled.div`
-    font-size: 12px;
+    font-size: 13px;
     margin-right: 5px;
   `;
   const TimeWrap = styled.div`
@@ -73,7 +96,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
     padding: 0 5px;
   `;
   const Gray = styled.span`
-    color: ${color.gray};
+    color: ${color.darkGray};
   `;
   const Img = styled.img`
     object-fit: cover;

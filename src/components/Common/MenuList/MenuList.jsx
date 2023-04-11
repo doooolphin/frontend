@@ -74,7 +74,7 @@ const TimeWrap = styled.div`
   padding: 0 5px;
 `;
 const Gray = styled.span`
-  color: ${color.gray};
+  color: ${color.darkGray};
 `;
 
 const Bold = styled.span`

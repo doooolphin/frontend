@@ -2,7 +2,8 @@ const color = {
   primary: '#AC4AC4',
   lightgray: 'lightgray',
   white: '#ffffff',
-  gray: 'gray'
+  gray: 'gray',
+  darkGray: '#555'
 };
 
 const width = {
