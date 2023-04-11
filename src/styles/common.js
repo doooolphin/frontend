@@ -10,4 +10,9 @@ const width = {
   minContainer: '320px'
 };
 
-export { color, width };
+const fontSize = {
+  h1: '20px',
+  h2: '14px'
+};
+
+export { color, width, fontSize };

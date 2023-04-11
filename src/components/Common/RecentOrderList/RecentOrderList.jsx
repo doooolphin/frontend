@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
-import { color } from '@styles/common';
+import { color, fontSize } from '@styles/common';
 import StarScore from '../Unit/StarScore';
 import DeliveryTime from '../Unit/DeliveryTime';
 import DistinctCard from '../Unit/DistinctCard';
@@ -22,10 +22,12 @@ const RecentOrderList = ({ orderLists, onClick }) => {
   };
 
   const MenuWrap = styled.div`
-    width: 90%;
-    margin: 20px auto;
+    margin: 5px;
     box-shadow: 1px 5px 8px 0px #eee;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 270px;
   `;
   const FoodWrap = styled.div`
     display: flex;
@@ -33,6 +35,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
     height: 120px;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
+    flex: 1;
   `;
 
   const FoodContentWrap = styled.div`
@@ -76,10 +79,35 @@ const RecentOrderList = ({ orderLists, onClick }) => {
     object-fit: cover;
     width: 100%;
   `;
-  const Wrap = styled.div``;
+  const Wrap = styled.div`
+    padding: 10px;
+  `;
 
+  const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+  `;
+  const MainTitle = styled.div`
+    font-size: ${fontSize.h1};
+    font-weight: bold;
+  `;
+  const BreakDown = styled.div`
+    font-size: ${fontSize.h2};
+    color: ${color.gray};
+    font-weight: bold;
+    &::after {
+      content: '>';
+      font-family: 'Trebuchet MS';
+    }
+  `;
   return (
     <Wrap className="RecentOrderList">
+      <Header>
+        <MainTitle>최근에 주문했어요</MainTitle>
+        <BreakDown>주문내역 보기</BreakDown>
+      </Header>
       <Slider {...settings}>
         {orderLists.map((orderList) => (
           <>
