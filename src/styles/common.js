@@ -3,7 +3,8 @@ const color = {
   lightgray: 'lightgray',
   white: '#ffffff',
   gray: 'gray',
-  darkGray: '#555'
+  darkGray: '#555',
+  moreLigthGray: '#eee'
 };
 
 const width = {
