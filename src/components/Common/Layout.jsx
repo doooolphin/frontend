@@ -24,11 +24,11 @@ const widthStyle = css`
   margin: 0 auto;
 `;
 
-const Layout = ({ header, footer, title, children }) => {
+const Layout = ({ header, footer, title, children, innerStyle }) => {
   return (
     <Container css={widthStyle}>
       {header ?? <Header css={widthStyle} title={title} />}
-      <Inner>{children}</Inner>
+      <Inner css={innerStyle}>{children}</Inner>
       {footer ?? <Footer css={widthStyle} />}
     </Container>
   );
@@ -39,6 +39,7 @@ Layout.propTypes = {
   footer: PropTypes.node,
   children: PropTypes.node,
   title: PropTypes.string,
+  innerStyle: PropTypes.object,
   component: PropTypes.string
 };
 
