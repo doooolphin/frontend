@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { StarFilled, FieldTimeOutlined } from '@ant-design/icons';
+import { color } from '@styles/common';
+import StarScore from '../Unit/StarScore';
+import DeliveryTime from '../Unit/DeliveryTime';
+import DistinctCard from '../Unit/DistinctCard';
+
 const MenuWrap = styled.div`
-  width: 90%;
+  width: 93%;
   margin: 20px auto;
   box-shadow: 1px 5px 8px 0px #eee;
   border-radius: 10px;
@@ -10,7 +14,7 @@ const MenuWrap = styled.div`
 const FoodWrap = styled.div`
   display: flex;
   width: 100%;
-  height: 120px;
+  height: 140px;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 `;
@@ -52,13 +56,14 @@ const Title = styled.div`
   white-space: nowrap;
   width: 55%;
   font-weight: bold;
+  font-size: 18px;
 `;
 const Score = styled.div`
   margin-right: 10px;
   font-weight: bold;
 `;
 const Label = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   margin-right: 5px;
 `;
 const TimeWrap = styled.div`
@@ -69,27 +74,12 @@ const TimeWrap = styled.div`
   padding: 0 5px;
 `;
 const Gray = styled.span`
-  color: #666;
-`;
-const Star = styled(StarFilled)`
-  margin-right: 3px;
-  color: #ffd600;
-`;
-const Time = styled(FieldTimeOutlined)`
-  margin-right: 3px;
+  color: ${color.darkGray};
 `;
 
-const Card = styled.span`
-  ${(props) =>
-    props.cardNm === '쿠폰' ? 'background: #ffebce; color: #7e4b00;' : 'background: #ffd9ec; color: #8f0035;'}
-  width: 30px;
-  height: 16px;
-  font-size: 6px;
-  margin-right: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 3px;
+const Bold = styled.span`
+  font-weight: bold;
+  color: ${color.gray};
 `;
 
 const menuList = ({ menuList }) => {
@@ -117,25 +107,25 @@ const menuList = ({ menuList }) => {
             <Content>
               <Title>{list.title}</Title>
               <Score>
-                <Star />
+                <StarScore />
                 {list.score}
               </Score>
               <TimeWrap>
-                <Time />
+                <DeliveryTime />
                 {list.time}
               </TimeWrap>
             </Content>
             <Content>
               <Label>
-                <Gray>최소주문</Gray> {list.minOrderAcc}원 ·
+                <Gray>최소주문</Gray> {list.minOrderAcc}원 <Bold>·</Bold>
               </Label>
               <Label>
-                <Gray>배달팁</Gray> {list.accTip} ·
+                <Gray>배달팁</Gray> {list.accTip} <Bold>·</Bold>
               </Label>
               <Label>{list.distance}</Label>
             </Content>
             <Content>
-              <Card cardNm={list.card}>{list.card}</Card>
+              <DistinctCard cardNm={list.card} />
             </Content>
           </FoodContentWrap>
         </MenuWrap>
