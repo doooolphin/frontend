@@ -30,7 +30,7 @@ const InputWrap = styled.div`
 
 const Img = styled(SearchOutlined)`
   color: ${color.darkGray};
-  margin-right: 10px;
+  margin: 0 10px;
 `;
 
 const InputText = styled.input`
@@ -56,8 +56,8 @@ const SearchInput = () => {
   return (
     <Wrapper>
       <InputWrap>
-        <Img src="search.png" />
-        <InputText ref={inputRef} />
+        <Img src="search.png" alt="search" />
+        <InputText ref={inputRef} placeholder="찾는 맛집 이름이 뭐예요?" />
         <EmptyInput onClick={onClickEmpty} />
       </InputWrap>
     </Wrapper>
