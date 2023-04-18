@@ -19,7 +19,7 @@ const Img = styled.img`
   height: 100%;
 `;
 const MainImage = styled.div`
-  flex: ${(props) => (props.idx > 1 ? 2 : 3)};
+  flex: ${(props) => (props.idx > 1 ? 2 : 1)};
   height: 100%;
 `;
 const FoodSubWrap = styled.div`
@@ -80,12 +80,12 @@ const Time = styled(FieldTimeOutlined)`
 `;
 
 const Card = styled.span`
-  background: #ffebce;
+  ${(props) =>
+    props.cardNm === '쿠폰' ? 'background: #ffebce; color: #7e4b00;' : 'background: #ffd9ec; color: #8f0035;'}
   width: 30px;
   height: 16px;
   font-size: 6px;
   margin-right: 5px;
-  color: #e69601;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,15 +100,15 @@ const menuList = ({ menuList }) => {
         <MenuWrap key={list.code}>
           <FoodWrap>
             <MainImage idx={list.image.length}>
-              <Img src={list.image[0]} />
+              <Img src={list.image[0]} alt={list.image[0]} />
             </MainImage>
             {list.image.length > 1 && (
               <FoodSubWrap>
                 <SubImage isTop={true}>
-                  <Img src={list.image[1]} />
+                  <Img src={list.image[1]} alt={list.image[1]} />
                 </SubImage>
                 <SubImage>
-                  <Img src={list.image[2]} />
+                  <Img src={list.image[2]} alt={list.image[2]} />
                 </SubImage>
               </FoodSubWrap>
             )}
@@ -135,7 +135,7 @@ const menuList = ({ menuList }) => {
               <Label>{list.distance}</Label>
             </Content>
             <Content>
-              <Card>{list.card}</Card>
+              <Card cardNm={list.card}>{list.card}</Card>
             </Content>
           </FoodContentWrap>
         </MenuWrap>

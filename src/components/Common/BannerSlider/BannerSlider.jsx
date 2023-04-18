@@ -5,23 +5,29 @@ import 'slick-carousel/slick/slick-theme.css';
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
+const SliderWrap = styled.div`
+  height: 100%;
+  position: relative;
+`;
+
 const SliderNum = styled.div`
   background: #000;
-  opacity: 50%;
+  opacity: 60%;
   border-radius: 10px;
-  width: 35px;
+  width: 45px;
   position: absolute;
-  top: 83px;
   right: 5px;
+  bottom: 5px;
 `;
 
 const SliderFont = styled.div`
-  font-size: 10px;
+  font-size: 14px;
   display: flex;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 600;
 `;
 
 const BannerSlider = ({ banners, onClick }) => {
@@ -39,20 +45,22 @@ const BannerSlider = ({ banners, onClick }) => {
 
   return (
     <div>
-      <Slider {...settings}>
-        {banners.map((banner) => (
-          <>
-            <div key={banner.code} onClick={() => onClick(banner)}>
-              <img src={banner.image} alt={banner.alt}></img>
-            </div>
-          </>
-        ))}
-      </Slider>
-      <SliderNum>
-        <SliderFont>
-          {bannerIdx}/{banners.length}
-        </SliderFont>
-      </SliderNum>
+      <SliderWrap>
+        <Slider {...settings}>
+          {banners.map((banner) => (
+            <>
+              <div key={banner.code} onClick={() => onClick(banner)}>
+                <img src={banner.image} alt={banner.alt}></img>
+              </div>
+            </>
+          ))}
+        </Slider>
+        <SliderNum>
+          <SliderFont>
+            {bannerIdx}/{banners.length}
+          </SliderFont>
+        </SliderNum>
+      </SliderWrap>
     </div>
   );
 };

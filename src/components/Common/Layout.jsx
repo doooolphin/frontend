@@ -12,8 +12,10 @@ const Container = styled.div`
 `;
 
 const Inner = styled.div`
-  padding-top: 50px;
-  padding-bottom: 70px;
+  padding: 50px 30px 70px 30px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 `;
 
 const widthStyle = css`
@@ -37,7 +39,8 @@ Layout.propTypes = {
   footer: PropTypes.node,
   children: PropTypes.node,
   title: PropTypes.string,
-  innerStyle: PropTypes.object
+  innerStyle: PropTypes.object,
+  component: PropTypes.string
 };
 
 export default Layout;
