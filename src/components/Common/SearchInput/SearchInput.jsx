@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
 const InputWrap = styled.div`
   background-color: ${color.moreLigthGray};
-  width: 90vw;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
