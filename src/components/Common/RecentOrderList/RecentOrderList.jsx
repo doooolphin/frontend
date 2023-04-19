@@ -8,36 +8,21 @@ import StarScore from '../Unit/StarScore';
 import DeliveryTime from '../Unit/DeliveryTime';
 import DistinctCard from '../Unit/DistinctCard';
 
-const RecentOrderList = ({ orderLists, onClick }) => {
+const RecentOrderList = ({ orderLists }) => {
   console.log(orderLists);
   const settings = {
     dots: false,
     arrows: true,
-    swipe: true,
     infinite: true,
     draggable: true,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 530,
         settings: {
-          slidesToShow: 6,
-          slidesToScroll: 6
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 4, // 768px 이상의 화면
-          slidesToScroll: 4
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2, // 480px 이하의 화면
+          slidesToShow: 2, // 530px 이하의 화면
           slidesToScroll: 2
         }
       }
@@ -104,6 +89,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
   `;
   const Wrap = styled.div`
     padding: 10px;
+    height: 270px;
   `;
 
   const Header = styled.div`
@@ -134,7 +120,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
       <Slider {...settings}>
         {orderLists.map((orderList) => (
           <>
-            <div key={orderList.code} onClick={() => onClick(orderList)}>
+            <div key={orderList.code}>
               <MenuWrap>
                 <FoodWrap>
                   <Img src={orderList.image} alt={orderList.alt}></Img>
@@ -173,8 +159,7 @@ const RecentOrderList = ({ orderLists, onClick }) => {
 };
 
 RecentOrderList.propTypes = {
-  orderLists: PropTypes.array,
-  onClick: PropTypes.func
+  orderLists: PropTypes.array
 };
 
 export default RecentOrderList;
