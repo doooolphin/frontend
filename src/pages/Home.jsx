@@ -13,9 +13,9 @@ const OrderWrap = styled.div`
 const DeliveryWrap = styled.div`
   border-radius: 10px;
   flex: 1;
-  height: 250px;
   margin-right: ${(props) => (props.isPackaging ? '' : '20px')};
   box-shadow: 1px 3px 7px 0px #ddd;
+  overflow: hidden;
 `;
 
 const BannerWrap = styled.div`
@@ -43,6 +43,12 @@ const Item = styled.div`
 
 const Img = styled.img`
   width: 40px;
+`;
+
+const OrderImg = styled.img`
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
 `;
 
 const Home = () => {
@@ -119,8 +125,12 @@ const Home = () => {
       footer={false}
     >
       <OrderWrap>
-        <DeliveryWrap></DeliveryWrap>
-        <DeliveryWrap isPackaging={true}></DeliveryWrap>
+        <DeliveryWrap>
+          <OrderImg src="copyImage/delivery.png" />
+        </DeliveryWrap>
+        <DeliveryWrap isPackaging={true}>
+          <OrderImg src="copyImage/packaging.png" />
+        </DeliveryWrap>
       </OrderWrap>
       <BannerWrap>
         <BannerSlider {...bannerArgs} />
