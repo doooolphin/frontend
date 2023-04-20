@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const InputWrap = styled.div`
-  background-color: ${color.moreLigthGray};
+  background-color: #f9f9f9;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -34,7 +34,7 @@ const Img = styled(SearchOutlined)`
 `;
 
 const InputText = styled.input`
-  background-color: ${color.moreLigthGray};
+  background-color: #f9f9f9;
   outline: none;
   border: none;
   flex: 1;
