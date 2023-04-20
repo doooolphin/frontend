@@ -126,10 +126,10 @@ const Home = () => {
     >
       <OrderWrap>
         <DeliveryWrap>
-          <OrderImg src="copyImage/delivery.png" />
+          <OrderImg src="copyImage/delivery.png" alt="delivery" />
         </DeliveryWrap>
         <DeliveryWrap isPackaging={true}>
-          <OrderImg src="copyImage/packaging.png" />
+          <OrderImg src="copyImage/packaging.png" alt="packaging" />
         </DeliveryWrap>
       </OrderWrap>
       <BannerWrap>
@@ -137,19 +137,19 @@ const Home = () => {
       </BannerWrap>
       <MyWrap>
         <Item>
-          <Img src="icon/pointBasic.png" />
+          <Img src="icon/pointBasic.png" alt="pointBasic" />
           <span>포인트</span>
         </Item>
         <Item>
-          <Img src="icon/couponBasic.png" />
+          <Img src="icon/couponBasic.png" alt="couponBasic" />
           <span>쿠폰함</span>
         </Item>
         <Item>
-          <Img src="icon/giftBasic.png" />
+          <Img src="icon/giftBasic.png" alt="giftBasic" />
           <span>선물함</span>
         </Item>
         <Item last={true}>
-          <Img src="icon/likeBasic.png" />
+          <Img src="icon/likeBasic.png" alt="likeBasic" />
           <span>찜</span>
         </Item>
       </MyWrap>
