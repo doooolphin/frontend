@@ -13,9 +13,6 @@ const Container = styled.div`
 
 const Inner = styled.div`
   padding: 50px 20px 70px 20px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
 `;
 
 const widthStyle = css`
