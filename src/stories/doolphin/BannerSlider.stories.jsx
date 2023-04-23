@@ -3,9 +3,6 @@ import BannerSlider from '@components/Common/BannerSlider/BannerSlider';
 export default {
   title: 'Doolphin/BannerSlider',
   component: BannerSlider,
-  argTypes: {
-    onClick: { action: 'onClick' }
-  },
   parameters: {
     layout: 'fullscreen'
   }

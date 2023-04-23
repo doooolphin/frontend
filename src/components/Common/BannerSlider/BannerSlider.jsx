@@ -30,7 +30,7 @@ const SliderFont = styled.div`
   font-weight: 600;
 `;
 
-const BannerSlider = ({ banners, onClick }) => {
+const BannerSlider = ({ banners }) => {
   console.log(banners);
   const settings = {
     dots: true,
@@ -49,7 +49,7 @@ const BannerSlider = ({ banners, onClick }) => {
         <Slider {...settings}>
           {banners.map((banner) => (
             <>
-              <div key={banner.code} onClick={() => onClick(banner)}>
+              <div key={banner.code}>
                 <img src={banner.image} alt={banner.alt}></img>
               </div>
             </>
@@ -66,8 +66,7 @@ const BannerSlider = ({ banners, onClick }) => {
 };
 
 BannerSlider.propTypes = {
-  banners: PropTypes.array,
-  onClick: PropTypes.func
+  banners: PropTypes.array
 };
 
 export default BannerSlider;

@@ -3,9 +3,6 @@ import RecentOrderList from '@components/Common/RecentOrderList/RecentOrderList'
 export default {
   title: 'Doolphin/RecentOrderList',
   component: RecentOrderList,
-  argTypes: {
-    onClick: { action: 'onClick' }
-  },
   parameters: {
     layout: 'fullscreen'
   }

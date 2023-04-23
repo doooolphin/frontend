@@ -1,31 +1,25 @@
 const path = require('path');
-const toPath = (_path) => path.join(process.cwd(), _path);
+const toPath = _path => path.join(process.cwd(), _path);
 module.exports = {
   staticDirs: ['../public'],
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-a11y',
-    'storybook-addon-react-router-v6'
-  ],
-  framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5'
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions', '@storybook/addon-a11y', 'storybook-addon-react-router-v6'],
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {}
   },
   features: {
     interactionsDebugger: true
   },
-  webpackFinal: async (config) => {
+  webpackFinal: async config => {
     config.module.rules.push({
       test: /\.(js|jsx)$/i,
       loader: 'babel-loader',
       options: {
-        presets: [
-          ['@babel/preset-env'],
-          ['@babel/preset-react', { runtime: 'automatic', importSource: '@emotion/react' }]
-        ],
+        presets: [['@babel/preset-env'], ['@babel/preset-react', {
+          runtime: 'automatic',
+          importSource: '@emotion/react'
+        }]],
         plugins: ['@emotion']
       }
     });
