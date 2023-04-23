@@ -8,4 +8,4 @@ export default {
   }
 };
 
-export const Default = <Footer />;
+export const Default = () => <Footer />;
