@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { color } from '@styles/common';
 import { memo, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SubWrapper = styled.div`
   flex: 1;
@@ -108,6 +109,7 @@ const btnWhiteColor = css`
 `;
 
 const SignUpAuthentication = () => {
+  const navigate = useNavigate();
   const nameRef = useRef(null);
   const birthRef = useRef(null);
   const telRef = useRef(null);
@@ -166,6 +168,10 @@ const SignUpAuthentication = () => {
 
   const onClickRequest = () => {
     setIsRequest(true);
+  };
+
+  const onClickNextPage = () => {
+    navigate('/sign-up/newemailpw');
   };
 
   const isAbleRequest = useMemo(() => info.birth && info.name && info.tel, [info]);
@@ -306,7 +312,12 @@ const SignUpAuthentication = () => {
         </SubWrapper>
       </MidWrapper>
       {isAbleRequest && (
-        <DefaultButton text="인증번호 요청" isChkTrue={true} radius="0" onClickRequest={onClickRequest} />
+        <DefaultButton
+          text={isRequest ? '확인' : '인증번호 요청'}
+          isChkTrue={true}
+          radius="0"
+          onClickRequest={isRequest ? onClickNextPage : onClickRequest}
+        />
       )}
     </Layout>
   );
