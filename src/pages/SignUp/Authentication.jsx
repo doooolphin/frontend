@@ -205,7 +205,10 @@ const SignUpAuthentication = () => {
     navigate('/sign-up/newemailpw');
   };
 
-  const isAbleRequest = useMemo(() => info.birth && info.name && info.tel, [info]);
+  const isAbleRequest = useMemo(
+    () => info.birth.length > 9 && info.name && /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/.test(info.tel),
+    [info]
+  );
 
   return (
     <>
