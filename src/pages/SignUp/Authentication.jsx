@@ -109,21 +109,32 @@ const btnWhiteColor = css`
   color: ${color.gray};
 `;
 
+const AuthenticationCss = {
+  emailError: css`
+    color: red;
+    margin-left: 20px;
+  `
+};
+
 const SignUpAuthentication = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const nameRef = useRef(null);
   const birthRef = useRef(null);
   const telRef = useRef(null);
+  const emailRef = useRef(null);
   const authNumRef = useRef(null);
 
   const [info, setInfo] = useState({
     name: '',
     birth: '',
     tel: '',
+    email: '',
     isLocal: true,
     isMan: true
   });
+
+  const [emailError, setEmailError] = useState('');
 
   const [nameBtnState, setNameBtnState] = useState(false);
   const [birthBtnState, setBirthBtnState] = useState(false);
@@ -138,8 +149,10 @@ const SignUpAuthentication = () => {
     } else if (active === 'birth') {
       birthRef.current.focus();
       !birthBtnState && setBirthBtnState(true);
+    } else if (active === 'tel') {
+      telRef.current.focus();
     } else {
-      isRequest ? authNumRef.current.focus() : telRef.current.focus();
+      isRequest ? authNumRef.current.focus() : emailRef.current.focus();
     }
   };
 
@@ -151,7 +164,7 @@ const SignUpAuthentication = () => {
   };
 
   const onChangeNameInput = (event) => {
-    const result = event.target.value.replace(/[^(ㄱ-힣)]/g, '');
+    const result = event.target.value.replace(/[^(ㄱ-힣)(a-z)(A-Z)]/g, '');
     setInfoState({
       name: result
     });
@@ -197,6 +210,18 @@ const SignUpAuthentication = () => {
     });
   };
 
+  const onChangeEmailInput = (event) => {
+    setInfoState({
+      email: event.target.value
+    });
+    const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    if (regex.test(event.target.value)) {
+      setEmailError('');
+    } else {
+      setEmailError('이메일 형식에 맞지 않습니다.');
+    }
+  };
+
   const onClickRequest = () => {
     setIsRequest(true);
   };
@@ -206,10 +231,14 @@ const SignUpAuthentication = () => {
   };
 
   const isAbleRequest = useMemo(
-    () => info.birth.length > 9 && info.name && /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/.test(info.tel),
+    () =>
+      info.birth.length > 9 &&
+      info.name &&
+      /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/.test(info.tel) &&
+      info.email &&
+      !emailError,
     [info]
   );
-
   return (
     <>
       {contextHolder}
@@ -339,6 +368,25 @@ const SignUpAuthentication = () => {
                 readOnly={isRequest}
                 isRequest={isRequest}
                 maxLength={13}
+              />
+            </SideWrapper>
+          </SubWrapper>
+          <SubWrapper
+            isLast={true}
+            css={activeInfo === 'email' ? borderColor : null}
+            onClick={() => onClickSubWrapper('email')}
+          >
+            <SideWrapper isLeft={true}>
+              <NameText css={activeInfo === 'email' ? textColor : null} isRequest={isRequest}>
+                이메일<span css={AuthenticationCss.emailError}>{emailError}</span>
+              </NameText>
+              <Input
+                ref={emailRef}
+                onChange={onChangeEmailInput}
+                value={info.email}
+                readOnly={isRequest}
+                isRequest={isRequest}
+                maxLength={50}
               />
             </SideWrapper>
             {isRequest && (
