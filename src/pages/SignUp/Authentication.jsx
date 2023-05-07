@@ -1,115 +1,87 @@
 import Layout from '@components/Common/Layout';
-import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { color } from '@styles/common';
-import { memo, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 
-const SubWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px 20px;
-  /* border-bottom: ${(props) => (props.isLast ? '1px solid #bbb;' : 'none !important')}; */
-  flex-direction: ${(props) => props.isLast && 'column'};
-  border: 1px solid ${color.lightgray};
-`;
-
-const H1 = styled.div`
-  font-size: 1em;
-  margin-top: 60px;
-  text-align: center;
-  color: #666;
-  margin-bottom: 50px;
-`;
-
-const MidWrapper = styled.span`
-  display: flex;
-  flex-direction: column;
-  min-height: 250px;
-`;
-
-const Input = styled.input`
-  border: none;
-  outline: none;
-  font-size: 14px;
-  color: ${(props) => props.isRequest && color.lightgray};
-`;
-
-const SideWrapper = styled.div`
-  border: none;
-  outline: none;
-  height: 60px;
-  font-size: 20px;
-  display: flex;
-  flex-direction: ${(props) => (props.isLeft ? 'column' : 'row')};
-  flex: ${(props) => (props.isLeft ? '3' : '1')};
-  ${(props) => (props.isLeft ? 'justify-content: center' : 'align-items: center')};
-  width: 100%;
-`;
-
-const NameBtn = styled.button`
-  border: none;
-  outline: none;
-  height: 60px;
-  font-size: 20px;
-  border-radius: 20px;
-  background: ${color.primary};
-  color: ${color.white};
-  height: 35px;
-  width: 75px;
-  font-size: 14px;
-`;
-
-const NameText = styled.span`
-  font-size: 14px;
-  color: ${(props) => props.isRequest && color.lightgray};
-`;
-
-const AuthNumWrapper = styled.div`
-  border-top: 1px solid ${color.lightgray};
-  width: 100%;
-  padding-top: 15px;
-`;
-
-const AuthMessage = styled.span`
-  color: #e10000;
-  margin-left: 10px;
-`;
-
-const ReBtn = styled.button`
-  color: #999;
-  text-decoration: underline;
-`;
-
-const ReDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const borderColor = css`
-  border-color: ${color.primary} !important;
-`;
-
-const textColor = css`
-  color: ${color.primary} !important;
-`;
-
-const btnPrimaryColor = css`
-  background-color: ${color.primary};
-`;
-
-const btnWhiteColor = css`
-  background-color: ${color.white};
-  color: ${color.gray};
-`;
-
 const AuthenticationCss = {
+  subWrapper: css`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid ${color.lightgray};
+  `,
+  h1: css`
+    font-size: 1em;
+    margin-top: 60px;
+    text-align: center;
+    color: #666;
+    margin-bottom: 50px;
+  `,
+  midWrapper: css`
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+  `,
+  input: css`
+    border: none;
+    outline: none;
+    font-size: 14px;
+  `,
+  sideWrapper: css`
+    display: flex;
+    flex-direction: column;
+  `,
+  nameBtn: css`
+    border: none;
+    outline: none;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 20px;
+    background: ${color.primary};
+    color: ${color.white};
+    height: 35px;
+    width: 75px;
+    font-size: 14px;
+  `,
+  nameText: css`
+    font-size: 14px;
+  `,
+  authNumWrapper: css`
+    border-top: 1px solid ${color.lightgray};
+    width: 100%;
+  `,
+  authMessage: css`
+    color: #e10000;
+    margin-left: 10px;
+  `,
+  reBtn: css`
+    color: #999;
+    text-decoration: underline;
+  `,
+  reDiv: css`
+    display: flex;
+    justify-content: space-between;
+  `,
+  borderColor: css`
+    border-color: ${color.primary};
+  `,
+  textColor: css`
+    color: ${color.primary};
+  `,
+  btnPrimaryColor: css`
+    background-color: ${color.primary};
+  `,
+  btnWhiteColor: css`
+    background-color: ${color.white};
+    color: ${color.lightgray};
+  `,
   emailError: css`
     color: red;
     margin-left: 20px;
@@ -131,7 +103,7 @@ const SignUpAuthentication = () => {
     tel: '',
     email: '',
     isLocal: true,
-    isMan: true
+    isMan: 0
   });
 
   const [emailError, setEmailError] = useState('');
@@ -223,12 +195,26 @@ const SignUpAuthentication = () => {
   };
 
   const onClickRequest = () => {
+    if (info.isMan === 0) {
+      messageApi.open({
+        type: 'warning',
+        content: '성별을 선택해주세요'
+      });
+      return;
+    }
     setIsRequest(true);
   };
 
   const onClickNextPage = () => {
     navigate('/sign-up/newemailpw');
   };
+
+  useEffect(() => {
+    if (isRequest) {
+      authNumRef.current.focus();
+      setActiveInfo('email');
+    }
+  }, [isRequest]);
 
   const isAbleRequest = useMemo(
     () =>
@@ -243,80 +229,99 @@ const SignUpAuthentication = () => {
     <>
       {contextHolder}
       <Layout footer={false} title="회원가입">
-        <H1>
+        <div css={AuthenticationCss.h1}>
           서비스의 안전한 사용을 위해
           <br />
           본인인증해주세요.
-        </H1>
-        <MidWrapper>
-          <SubWrapper
-            css={
+        </div>
+        <div css={AuthenticationCss.midWrapper}>
+          <div
+            css={[
+              AuthenticationCss.subWrapper,
               activeInfo === 'name'
-                ? borderColor
+                ? AuthenticationCss.borderColor
                 : null ||
                   (isRequest &&
                     css`
                       pointer-events: none;
+                      color: ${color.lightgray};
                     `)
-            }
+            ]}
             onClick={() => onClickSubWrapper('name')}
           >
-            <SideWrapper isLeft={true}>
-              <NameText css={activeInfo === 'name' ? textColor : null} isRequest={isRequest}>
+            <div css={AuthenticationCss.sideWrapper}>
+              <span
+                css={[AuthenticationCss.nameText, activeInfo === 'name' && AuthenticationCss.textColor]}
+                isRequest={isRequest}
+              >
                 이름
-              </NameText>
-              <Input
+              </span>
+              <input
+                type="text"
+                css={AuthenticationCss.input}
                 ref={nameRef}
                 value={info.name}
                 onChange={onChangeNameInput}
                 isRequest={isRequest}
                 maxLength={25}
               />
-            </SideWrapper>
-            <SideWrapper>
+            </div>
+            <div>
               {nameBtnState && (
                 <>
-                  <NameBtn
+                  <button
+                    css={[
+                      AuthenticationCss.nameBtn,
+                      info.isLocal ? AuthenticationCss.btnPrimaryColor : AuthenticationCss.btnWhiteColor
+                    ]}
                     onClick={() =>
                       setInfoState({
                         isLocal: true
                       })
                     }
-                    css={info.isLocal ? btnPrimaryColor : btnWhiteColor}
                   >
                     내국인
-                  </NameBtn>
-                  <NameBtn
+                  </button>
+                  <button
+                    css={[
+                      AuthenticationCss.nameBtn,
+                      !info.isLocal ? AuthenticationCss.btnPrimaryColor : AuthenticationCss.btnWhiteColor
+                    ]}
                     onClick={() =>
                       setInfoState({
                         isLocal: false
                       })
                     }
-                    css={!info.isLocal ? btnPrimaryColor : btnWhiteColor}
                   >
                     외국인
-                  </NameBtn>
+                  </button>
                 </>
               )}
-            </SideWrapper>
-          </SubWrapper>
-          <SubWrapper
-            css={
+            </div>
+          </div>
+          <div
+            css={[
+              AuthenticationCss.subWrapper,
               activeInfo === 'birth'
-                ? borderColor
-                : null ||
-                  (isRequest &&
-                    css`
-                      pointer-events: none;
-                    `)
-            }
+                ? AuthenticationCss.borderColor
+                : isRequest &&
+                  css`
+                    color: ${color.lightgray};
+                    pointer-events: none;
+                  `
+            ]}
             onClick={() => onClickSubWrapper('birth')}
           >
-            <SideWrapper isLeft={true}>
-              <NameText css={activeInfo === 'birth' ? textColor : null} isRequest={isRequest}>
+            <div css={AuthenticationCss.sideWrapper}>
+              <span
+                css={[AuthenticationCss.nameText, activeInfo === 'birth' ? AuthenticationCss.textColor : null]}
+                isRequest={isRequest}
+              >
                 생년월일
-              </NameText>
-              <Input
+              </span>
+              <input
+                type="text"
+                css={AuthenticationCss.input}
                 placeholder="YYYYMMDD"
                 ref={birthRef}
                 onChange={onChangeBirthInput}
@@ -324,44 +329,65 @@ const SignUpAuthentication = () => {
                 isRequest={isRequest}
                 maxLength={8}
               />
-            </SideWrapper>
-            <SideWrapper>
+            </div>
+            <div>
               {birthBtnState && (
                 <>
-                  <NameBtn
+                  <button
+                    css={[
+                      AuthenticationCss.nameBtn,
+                      info.isMan === 1 ? AuthenticationCss.btnPrimaryColor : AuthenticationCss.btnWhiteColor
+                    ]}
                     onClick={() =>
                       setInfoState({
-                        isMan: true
+                        isMan: 1
                       })
                     }
-                    css={info.isMan ? btnPrimaryColor : btnWhiteColor}
                   >
                     남
-                  </NameBtn>
-                  <NameBtn
+                  </button>
+                  <button
+                    css={[
+                      AuthenticationCss.nameBtn,
+                      info.isMan === 2 ? AuthenticationCss.btnPrimaryColor : AuthenticationCss.btnWhiteColor
+                    ]}
                     onClick={() =>
                       setInfoState({
-                        isMan: false
+                        isMan: 2
                       })
                     }
-                    css={!info.isMan ? btnPrimaryColor : btnWhiteColor}
                   >
                     여
-                  </NameBtn>
+                  </button>
                 </>
               )}
-            </SideWrapper>
-          </SubWrapper>
-          <SubWrapper
+            </div>
+          </div>
+          <div
+            css={[
+              AuthenticationCss.subWrapper,
+              activeInfo === 'tel'
+                ? AuthenticationCss.borderColor
+                : null ||
+                  (isRequest &&
+                    css`
+                      color: ${color.lightgray};
+                      pointer-events: none;
+                    `)
+            ]}
             isLast={true}
-            css={activeInfo === 'tel' ? borderColor : null}
             onClick={() => onClickSubWrapper('tel')}
           >
-            <SideWrapper isLeft={true}>
-              <NameText css={activeInfo === 'tel' ? textColor : null} isRequest={isRequest}>
+            <div css={AuthenticationCss.sideWrapper}>
+              <span
+                css={[AuthenticationCss.nameText, activeInfo === 'tel' ? AuthenticationCss.textColor : null]}
+                isRequest={isRequest}
+              >
                 휴대전화 번호
-              </NameText>
-              <Input
+              </span>
+              <input
+                type="text"
+                css={AuthenticationCss.input}
                 ref={telRef}
                 onChange={onChangeTelInput}
                 value={info.tel}
@@ -369,18 +395,39 @@ const SignUpAuthentication = () => {
                 isRequest={isRequest}
                 maxLength={13}
               />
-            </SideWrapper>
-          </SubWrapper>
-          <SubWrapper
+            </div>
+          </div>
+          <div
+            css={[
+              AuthenticationCss.subWrapper,
+              activeInfo === 'email' ? AuthenticationCss.borderColor : null,
+              isRequest &&
+                css`
+                  flex-direction: column;
+                  align-items: flex-start;
+                `
+            ]}
             isLast={true}
-            css={activeInfo === 'email' ? borderColor : null}
             onClick={() => onClickSubWrapper('email')}
           >
-            <SideWrapper isLeft={true}>
-              <NameText css={activeInfo === 'email' ? textColor : null} isRequest={isRequest}>
+            <div
+              css={[
+                AuthenticationCss.sideWrapper,
+                isRequest &&
+                  css`
+                    color: ${color.lightgray};
+                  `
+              ]}
+            >
+              <span
+                css={[AuthenticationCss.nameText, activeInfo === 'email' ? AuthenticationCss.textColor : null]}
+                isRequest={isRequest}
+              >
                 이메일<span css={AuthenticationCss.emailError}>{emailError}</span>
-              </NameText>
-              <Input
+              </span>
+              <input
+                type="text"
+                css={AuthenticationCss.input}
                 ref={emailRef}
                 onChange={onChangeEmailInput}
                 value={info.email}
@@ -388,21 +435,31 @@ const SignUpAuthentication = () => {
                 isRequest={isRequest}
                 maxLength={50}
               />
-            </SideWrapper>
+            </div>
             {isRequest && (
-              <>
-                <AuthNumWrapper>
-                  <NameText isRequest={isRequest}>인증번호</NameText>
-                  <AuthMessage>인증번호를 보내드렸어요. ( 0분 0초)</AuthMessage>
-                  <ReDiv>
-                    <Input ref={authNumRef} />
-                    <ReBtn onClickRequest={onClickRequest}>재요청</ReBtn>
-                  </ReDiv>
-                </AuthNumWrapper>
-              </>
+              <div
+                css={
+                  (AuthenticationCss.authNumWrapper,
+                  css`
+                    margin-top: 10px;
+                    padding-top: 10px;
+                    width: 100%;
+                    border-top: 1px solid lightgray;
+                  `)
+                }
+              >
+                <span css={AuthenticationCss.nameText}>인증번호</span>
+                <span css={AuthenticationCss.authMessage}>인증번호를 보내드렸어요. ( 0분 0초)</span>
+                <div css={AuthenticationCss.reDiv}>
+                  <input type="text" css={AuthenticationCss.input} ref={authNumRef} />
+                  <button css={AuthenticationCss.reBtn} onClickRequest={onClickRequest}>
+                    재요청
+                  </button>
+                </div>
+              </div>
             )}
-          </SubWrapper>
-        </MidWrapper>
+          </div>
+        </div>
         {isAbleRequest && (
           <DefaultButton
             text={isRequest ? '확인' : '인증번호 요청'}
