@@ -52,5 +52,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: start-server-and-test npm run serve http://127.0.0.1:3000 
+          start: npm run cypress-serve
           config-file: cypress.config.js
