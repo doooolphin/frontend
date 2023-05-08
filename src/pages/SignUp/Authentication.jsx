@@ -186,7 +186,7 @@ const SignUpAuthentication = () => {
     setInfoState({
       email: event.target.value
     });
-    const regex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     if (regex.test(event.target.value)) {
       setEmailError('');
     } else {
