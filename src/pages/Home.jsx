@@ -122,6 +122,10 @@ const Home = () => {
           address="It's alright~ 우리집으로 가자~"
         />
       }
+      innerStyle={css`
+        display: flex;
+        flex-direction: column;
+      `}
       footer={false}
     >
       <OrderWrap>

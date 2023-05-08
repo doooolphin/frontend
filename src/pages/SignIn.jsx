@@ -3,6 +3,7 @@ import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { css } from '@emotion/react';
 
 const HeadWrapper = styled.div`
   height: 400px;
@@ -98,7 +99,16 @@ const SignIn = () => {
     }
   };
   return (
-    <Layout inner={<></>} footer={false} title="로그인">
+    <Layout
+      inner={<></>}
+      footer={false}
+      title="로그인"
+      innerStyle={css`
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      `}
+    >
       <Container>
         <HeadWrapper>
           <SubWrapper>

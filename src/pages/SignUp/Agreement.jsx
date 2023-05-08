@@ -5,6 +5,7 @@ import { RightOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { useNavigate } from 'react-router-dom';
+import { css } from '@emotion/react';
 
 const FootWrapper = styled.div`
   display: flex;
@@ -107,7 +108,15 @@ const SignUp = () => {
   };
 
   return (
-    <Layout footer={false} title="회원가입">
+    <Layout
+      footer={false}
+      title="회원가입"
+      innerStyle={css`
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      `}
+    >
       <Container>
         <H1>
           반가워요! 가입하려면

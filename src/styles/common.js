@@ -1,11 +1,12 @@
 const color = {
   primary: '#AC4AC4',
-  darkGray: '#9e9e9e',
   lightgray: 'lightgray',
   white: '#ffffff',
   gray: 'gray',
   darkGray: '#555',
-  moreLigthGray: '#eee'
+  moreLigthGray: '#eee',
+  lightGrayBg: '#F9F9FA',
+  darkGrayText: '#9e9e9e'
 };
 
 const width = {
