@@ -3,7 +3,7 @@ import Main from '@pages/Main';
 import SignIn from '@pages/SignIn';
 import Agreement from '@pages/SignUp/Agreement';
 import Authentication from '@pages/SignUp/Authentication';
-import NewEmailPw from '@pages/SignUp/NewEmailPw';
+import NewNamePw from '@pages/SignUp/NewNamePw';
 
 const Router = () => {
   return (
@@ -12,7 +12,7 @@ const Router = () => {
       <Route path="/sign-in" element={<SignIn />}></Route>
       <Route path="/sign-up/agreement" element={<Agreement />}></Route>
       <Route path="/sign-up/authentication" element={<Authentication />}></Route>
-      <Route path="/sign-up/newemailpw" element={<NewEmailPw />}></Route>
+      <Route path="/sign-up/newnamepw" element={<NewNamePw />}></Route>
       <Route path="*" element={<Main />}></Route>
     </Routes>
   );
