@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { CheckOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+import { color } from '@styles/common';
 
 const inputTextCss = {
   wrap: css`
@@ -66,47 +68,87 @@ const inputTextCss = {
 };
 
 function InputText(props) {
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const [errorText, setErrorText] = useState('');
   const validateObj = [...props.validateChk];
 
-  const onClickChk = () => {
-    const regex = new RegExp(props.validateChk[props.index].regex);
-    const result = regex.test(input);
+  const onChangeInput = (event) => {
+    let result;
+    const regex = new RegExp(validateObj[props.index].regex);
+    setInput(event.target.value);
+
+    if (validateObj[props.index].validateNm === 'name') {
+      props.setInfoState({ name: event.target.value });
+      result = regex.test(event.target.value);
+    } else if (validateObj[props.index].validateNm === 'password') {
+      props.setInfoState({ password: event.target.value });
+      result = regex.test(event.target.value);
+    } else {
+      if (props.info.password === event.target.value) result = true;
+    }
 
     if (result) {
-      validateObj[props.index].isChecked = true;
-      props.setValidateChk(validateObj);
       setErrorText('');
-
-      // TODO: email이면 중복검사 api 요청
     } else {
-      validateObj[props.index].isChecked = false;
-      props.setValidateChk(validateObj);
       setErrorText(validateObj[props.index].errorText);
     }
   };
+
+  const onClickChk = () => {
+    const regex = new RegExp(validateObj[props.index].regex);
+    const result = regex.test(input);
+
+    if (!input) setErrorText(`${validateObj[props.index].label}을 입력해주세요.`);
+
+    // 유효성 검증
+    if (result) {
+      validateObj[props.index].isChecked = true;
+      props.setValidateChk(validateObj);
+
+      // 마지막 input 검증완료 시
+      if (validateObj[props.index]?.isLast) {
+        //TODO:: api 요청
+        navigate('/');
+      }
+    } else {
+      validateObj[props.index].isChecked = false;
+      props.setValidateChk(validateObj);
+    }
+  };
   return (
-    <div css={inputTextCss.wrap}>
+    <div
+      css={
+        ((inputTextCss.wrap,
+        validateObj[props.index].isChecked &&
+          validateObj[props.index].validateNm !== 'password' &&
+          css`
+            pointer-events: none;
+            color: ${color.lightgray};
+          `),
+        css`
+          margin-bottom: 50px;
+        `)
+      }
+    >
       <div css={inputTextCss.inputWrap}>
-        <span css={inputTextCss.label}>{props.validateChk[props.index].label}</span>
+        <span css={inputTextCss.label}>{validateObj[props.index].label}</span>
         <input
           css={inputTextCss.input}
-          onChange={(event) => setInput(event.target.value)}
+          onChange={onChangeInput}
           isChecked={validateObj[props.index].isChecked}
           maxLength={validateObj[props.index].maxLength}
           placeholder={validateObj[props.index].placeHolder}
+          type={validateObj[props.index].type}
         />
-        {!validateObj[props.index].isChecked && props.index === 1 && (
+        {/* {!validateObj[props.index].isChecked && props.index === 1 && (
           <div css={inputTextCss.timerWrap}>
             <span css={inputTextCss.timer}>5:00</span>
             <span css={inputTextCss.resend}>다시 받기</span>
           </div>
-        )}
+        )} */}
         {validateObj[props.index].isChecked ? (
-          <span css={inputTextCss.chkIcon}>
-            <CheckOutlined />
-          </span>
+          <span css={inputTextCss.chkIcon}>{!errorText && <CheckOutlined />}</span>
         ) : (
           <div css={inputTextCss.btnChk} onClick={onClickChk}>
             확인
@@ -121,7 +163,9 @@ function InputText(props) {
 InputText.propTypes = {
   setValidateChk: PropTypes.object,
   validateChk: PropTypes.object,
-  index: PropTypes.number
+  index: PropTypes.number,
+  setInfoState: PropTypes.object,
+  info: PropTypes.object
 };
 
 export default InputText;
