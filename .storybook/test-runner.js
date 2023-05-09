@@ -5,7 +5,7 @@ module.exports = {
     await injectAxe(page);
   },
   async postRender(page, context) {
-    await checkA11y(page, '#root', {
+    await checkA11y(page, '#storybook-root', {
       detailedReport: true,
       detailedReportOptions: {
         html: true
