@@ -52,5 +52,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
-          start: npm run cypress-serve
+          start: npm run serve
           config-file: cypress.config.js
