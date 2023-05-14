@@ -1,9 +1,9 @@
 import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
-import Header from '@components/Common/Header';
 import { css } from '@emotion/react';
 import BannerSlider from '@components/Common/BannerSlider/BannerSlider';
 import RecentOrderList from '@components/Common/RecentOrderList/RecentOrderList';
+import MainHeader from '@components/Common/Header/MainHeader';
 
 const OrderWrap = styled.div`
   margin: 70px 0 30px 0;
@@ -109,19 +109,7 @@ const Home = () => {
   };
   return (
     <Layout
-      header={
-        <Header
-          css={css`
-            max-width: inherit;
-            min-width: inherit;
-            margin: 0 auto;
-          `}
-          main
-          search
-          hasNotice
-          address="It's alright~ 우리집으로 가자~"
-        />
-      }
+      header={<MainHeader hasNotice address="It's alright~ 우리집으로 가자~" />}
       innerStyle={css`
         display: flex;
         flex-direction: column;

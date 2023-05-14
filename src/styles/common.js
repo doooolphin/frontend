@@ -6,7 +6,8 @@ const color = {
   darkGray: '#555',
   moreLigthGray: '#eee',
   lightGrayBg: '#F9F9FA',
-  darkGrayText: '#9e9e9e'
+  darkGrayText: '#9e9e9e',
+  black: '#000000'
 };
 
 const width = {

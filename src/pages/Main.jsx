@@ -1,26 +1,8 @@
-import Header from '@components/Common/Header';
-import { css } from '@emotion/react';
 import Layout from '@components/Common/Layout';
+import MainHeader from '@components/Common/Header/MainHeader';
 
 const Main = () => {
-  return (
-    <Layout
-      header={
-        <Header
-          css={css`
-            max-width: inherit;
-            min-width: inherit;
-            margin: 0 auto;
-          `}
-          main
-          hasNotice
-          address="It's alright~ 우리집으로 가자~"
-        />
-      }
-    >
-      메인!
-    </Layout>
-  );
+  return <Layout header={<MainHeader hasNotice address="It's alright~ 우리집으로 가자~" />}>메인!</Layout>;
 };
 
 export default Main;
