@@ -1,18 +1,21 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-import PropTypes from 'prop-types';
 
-const Child = styled.div`
+const Child = styled('div')`
   color: red;
 `;
 
-const Parent = styled.div`
+const Parent = styled('div')`
   ${Child} {
     color: green;
   }
 `;
 
-const CssProp = ({ children }) => (
+const Link = styled('a')`
+  color: red;
+`;
+
+const CssProp = ({ children }: { children: React.ReactNode }) => (
   <div
     css={css`
       padding: 32px;
@@ -27,16 +30,12 @@ const CssProp = ({ children }) => (
   </div>
 );
 
-CssProp.propTypes = {
-  children: PropTypes.node.isRequired
-};
-
 const testEmotion = () => {
   return (
     <CssProp>
-      <Parent>
+      <Link>
         <Child>styled div</Child>
-      </Parent>
+      </Link>
       <Child>styled div</Child>
     </CssProp>
   );

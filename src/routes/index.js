@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import Main from '@pages/Main';
-import SignIn from '@pages/SignIn';
-import My from '@pages/My';
-import Agreement from '@pages/SignUp/Agreement';
-import Authentication from '@pages/SignUp/Authentication';
-import Home from '@pages/Home';
+import Main from '../_pages/Main';
+import SignIn from '../_pages/SignIn';
+import My from '../_pages/My';
+import Agreement from '../_pages/SignUp/Agreement';
+import Authentication from '../_pages/SignUp/Authentication';
+import Home from '../_pages/Home';
 
 const Router = () => {
   return (
