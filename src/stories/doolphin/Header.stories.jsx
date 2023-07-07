@@ -1,21 +1,31 @@
-import Header from '@components/Common/Header';
+import Address from '@components/Common/Header/Address';
+import Header from '@components/Common/Header/Header';
+import MainHeader from '@components/Common/Header/MainHeader';
 
 export default {
   title: 'Doolphin/Header',
-  component: Header,
-  args: {
-    address: 'E편한세상광주역5단지'
-  }
+  component: Header
 };
 
 const Template = (args) => <Header {...args} />;
+const AdressTemplate = (args) => <Header center={<Address address={args.address} />} />;
+const MainTemplate = (args) => <MainHeader {...args} />;
 
-export const Default = Template.bind({});
+export const DefaultStory = Template.bind({});
 
-const MainTemplate = (args) => <Header main {...args} />;
+DefaultStory.args = {
+  title: '내 정보'
+};
 
-export const Main = MainTemplate.bind({});
+export const AddressStory = AdressTemplate.bind({});
 
-Main.args = {
+AddressStory.args = {
+  address: '역삼센터필드'
+};
+
+export const MainStory = MainTemplate.bind({});
+
+MainStory.args = {
+  address: '역삼센터필드',
   hasNotice: true
 };

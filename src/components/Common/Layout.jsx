@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Header from '@components/Common/Header';
+import Header from '@components/Common/Header/Header';
 import Footer from '@components/Common/Footer';
 import { width } from '@styles/common';
 import styled from '@emotion/styled';
