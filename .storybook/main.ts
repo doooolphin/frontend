@@ -1,6 +1,9 @@
 import type { StorybookConfig } from '@storybook/nextjs';
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
+import * as path from 'path';
 
 const config: StorybookConfig = {
+  staticDirs: ['../public'],
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -14,6 +17,21 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag'
+  },
+  webpackFinal: async (config) => {
+    config.resolve.alias = {
+      '@assets': path.resolve(__dirname, '../src/assets/'),
+      '@hooks': path.resolve(__dirname, '../src/hooks/'),
+      '@components': path.resolve(__dirname, '../src/components/'),
+      '@pages': path.resolve(__dirname, '../src/pages/'),
+      '@utils': path.resolve(__dirname, '../src/utils/'),
+      '@routes': path.resolve(__dirname, '../src/routes/'),
+      '@styles': path.resolve(__dirname, '../src/styles/'),
+      '@services': path.resolve(__dirname, '../src/services/'),
+      '@constants': path.resolve(__dirname, '../src/constants/'),
+      '@mocks': path.resolve(__dirname, '../src/mocks/')
+    };
+    return config;
   }
 };
 

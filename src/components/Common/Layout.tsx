@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import Header from '@components/Common/Header/Header';
 import Footer from '@components/Common/Footer';
 import { width } from '@styles/common';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
+import { Interpolation } from '@emotion/serialize/dist/emotion-serialize.cjs';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -21,7 +21,15 @@ const widthStyle = css`
   margin: 0 auto;
 `;
 
-const Layout = ({ header, footer, title, children, innerStyle }) => {
+type Props = {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  title?: string;
+  children: React.ReactNode;
+  innerStyle?: Interpolation<Theme>;
+};
+
+const Layout = ({ header, footer, title, children, innerStyle }: Props) => {
   return (
     <Container css={widthStyle}>
       {header ?? <Header css={widthStyle} title={title} />}
@@ -29,15 +37,6 @@ const Layout = ({ header, footer, title, children, innerStyle }) => {
       {footer ?? <Footer css={widthStyle} />}
     </Container>
   );
-};
-
-Layout.propTypes = {
-  header: PropTypes.node,
-  footer: PropTypes.node,
-  children: PropTypes.node,
-  title: PropTypes.string,
-  innerStyle: PropTypes.object,
-  component: PropTypes.string
 };
 
 export default Layout;

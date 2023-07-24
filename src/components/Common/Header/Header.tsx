@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import BackButton from '../Button/BackButton';
 import { css } from '@emotion/react';
 import { color } from '@styles/common';
+import React from 'react';
 
 const headerCss = {
   wrap: css`
@@ -29,11 +28,17 @@ const headerCss = {
   `
 };
 
-const Header = ({ left, title, center, right, ...props }) => {
-  const navigate = useNavigate();
+type Props = {
+  left?: React.ReactNode;
+  title?: React.ReactNode;
+  center?: React.ReactNode;
+  right?: React.ReactNode;
+  [p: string]: any;
+};
 
+const Header = ({ left, title, center, right, ...props }: Props) => {
   const onClickBack = () => {
-    navigate(-1);
+    // navigate(-1);
   };
 
   return (
@@ -45,13 +50,6 @@ const Header = ({ left, title, center, right, ...props }) => {
       <div>{right}</div>
     </header>
   );
-};
-
-Header.propTypes = {
-  left: PropTypes.node,
-  title: PropTypes.string,
-  center: PropTypes.node,
-  right: PropTypes.node
 };
 
 export default Header;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 
 const backButtonCss = {
@@ -11,7 +10,11 @@ const backButtonCss = {
   `
 };
 
-const BackButton = ({ onClick }) => {
+type Props = {
+  onClick: () => void;
+};
+
+const BackButton = ({ onClick }: Props) => {
   return (
     <button css={backButtonCss.wrap} onClick={onClick} aria-label="back">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +27,4 @@ const BackButton = ({ onClick }) => {
   );
 };
 
-BackButton.propTypes = {
-  onClick: PropTypes.func
-};
 export default BackButton;

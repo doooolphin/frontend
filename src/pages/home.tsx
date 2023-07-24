@@ -10,7 +10,7 @@ const OrderWrap = styled.div`
   display: flex;
 `;
 
-const DeliveryWrap = styled.div`
+const DeliveryWrap = styled.div<{ isPackaging?: boolean }>`
   border-radius: 10px;
   flex: 1;
   margin-right: ${(props) => (props.isPackaging ? '' : '20px')};
@@ -32,7 +32,7 @@ const MyWrap = styled.div`
   height: 100px;
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ last?: boolean }>`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,6 @@ const Home = () => {
         display: flex;
         flex-direction: column;
       `}
-      footer={false}
     >
       <OrderWrap>
         <DeliveryWrap>

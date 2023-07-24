@@ -1,11 +1,17 @@
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import { color } from '@styles/common';
 
-const LoginBtn = styled.button`
+type Props = {
+  text?: string;
+  radius?: string;
+  onClickNext?: () => void;
+  onClickRequest?: () => void;
+  isChkTrue: boolean;
+};
+
+const LoginBtn = styled.button<Props>`
   background: ${(props) => (props.isChkTrue ? color.primary : color.lightgray)};
   color: #ffffff;
-  width: 500px;
   height: 70px;
   border-radius: ${(props) => (props.radius === '0' ? '0px' : '5px')};
   font-size: 20px;
@@ -13,20 +19,12 @@ const LoginBtn = styled.button`
   width: 100%;
 `;
 
-const DefaultButton = (props) => {
+const DefaultButton = (props: Props) => {
   return (
     <LoginBtn onClick={props.onClickNext || props.onClickRequest} isChkTrue={props.isChkTrue} radius={props.radius}>
       {props.text}
     </LoginBtn>
   );
-};
-
-DefaultButton.propTypes = {
-  text: PropTypes.string,
-  radius: PropTypes.string,
-  onClickNext: PropTypes.func,
-  onClickRequest: PropTypes.func,
-  isChkTrue: PropTypes.boolean
 };
 
 export default DefaultButton;

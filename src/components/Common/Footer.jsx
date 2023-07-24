@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -24,8 +23,6 @@ const Button = styled.button`
 `;
 
 const Footer = ({ ...props }) => {
-  const navigate = useNavigate();
-
   const onClickSearch = () => {
     //TODO:
   };
@@ -39,7 +36,7 @@ const Footer = ({ ...props }) => {
     //TODO:
   };
   const onClickMy = () => {
-    navigate('/my');
+    //
   };
 
   return (

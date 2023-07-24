@@ -1,6 +1,15 @@
 import GlobalStyle from '../src/components/Common/GlobalStyle';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
+export const decorators = [
+  (Story) => (
+    <>
+      <GlobalStyle />
+      <Story />
+    </>
+  )
+];
+
 const customViewports = {
   doooolphin: {
     name: 'doooolphin',
