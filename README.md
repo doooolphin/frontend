@@ -2,7 +2,7 @@
 
 ## Description
 
-REACT SPA APP
+Next.js APP
 
 ## Installation
 
@@ -14,4 +14,4 @@ REACT SPA APP
 
 ## Dev Server
 
-- `npm run serve`
+- `npm run dev`
