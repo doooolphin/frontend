@@ -1,7 +1,7 @@
 import { RightOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
 import { color } from '@styles/common';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const sideInfos = [
   { name: '공지사항', linkUrl: '' },
@@ -35,11 +35,13 @@ const SideInfos = () => (
   <div css={infoCss.wrap}>
     {sideInfos.map((sideInfo) => (
       <div key={sideInfo.name} css={infoCss.section}>
-        <Link to={sideInfo.linkUrl}>
-          <span>{sideInfo.name}</span>
-          <span css={infoCss.button}>
-            <RightOutlined />
-          </span>
+        <Link href={sideInfo.linkUrl}>
+          <a>
+            <span>{sideInfo.name}</span>
+            <span css={infoCss.button}>
+              <RightOutlined />
+            </span>
+          </a>
         </Link>
       </div>
     ))}

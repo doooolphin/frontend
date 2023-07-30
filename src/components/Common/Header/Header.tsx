@@ -2,6 +2,7 @@ import BackButton from '../Button/BackButton';
 import { css } from '@emotion/react';
 import { color } from '@styles/common';
 import React from 'react';
+import { useRouter } from 'next/router';
 
 const headerCss = {
   wrap: css`
@@ -37,8 +38,9 @@ type Props = {
 };
 
 const Header = ({ left, title, center, right, ...props }: Props) => {
+  const router = useRouter();
   const onClickBack = () => {
-    // navigate(-1);
+    router.back();
   };
 
   return (

@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import BackButton from './Button/BackButton';
@@ -7,7 +6,8 @@ import MenuButton from './Button/MenuButton';
 import NoticeButton from './Button/NoticeButton';
 import SearchInput from './SearchInput/SearchInput';
 import { color } from '@styles/common';
-const HeaderWrapper = styled.header`
+import { useRouter } from 'next/router';
+const HeaderWrapper = styled.header<{ search?: boolean; main?: boolean }>`
   position: fixed;
   height: ${(props) => (props.search ? '100px' : '50px')};
   top: 0;
@@ -31,7 +31,7 @@ const HeaderBottom = styled.div`
   color: #000;
 `;
 
-const Address = styled.div`
+const Address = styled.div<{ search?: boolean; main?: boolean }>`
   position: absolute;
   top: ${(props) => (props.search ? '30%' : '50%')};
   left: 50%;
@@ -62,13 +62,21 @@ const Title = styled.h2`
   font-size: 17px;
 `;
 
-const Header = ({ main, search, title, address, hasNotice, ...props }) => {
-  const navigate = useNavigate();
+type Props = {
+  main?: boolean;
+  search?: boolean;
+  title?: string;
+  address?: string;
+  hasNotice?: boolean;
+};
+
+const Header = ({ main, search, title, address, hasNotice, ...props }: Props) => {
+  const router = useRouter();
   const onClickAddress = () => {
     //TODO:
   };
   const onClickBack = () => {
-    navigate(-1);
+    router.back();
   };
   const onClickMenu = () => {
     //TODO:
@@ -114,14 +122,6 @@ const Header = ({ main, search, title, address, hasNotice, ...props }) => {
       )}
     </HeaderWrapper>
   );
-};
-
-Header.propTypes = {
-  main: PropTypes.bool,
-  search: PropTypes.bool,
-  title: PropTypes.string,
-  address: PropTypes.string,
-  hasNotice: PropTypes.bool
 };
 
 export default Header;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { color } from '@styles/common';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const infos = [
   { name: '포인트', iconUrl: '/icon/point.png', linkUrl: '' },
@@ -33,13 +33,15 @@ const infoCss = {
 const Infos = () => (
   <div css={infoCss.wrap}>
     {infos.map((info) => (
-      <Link key={info.name} to={info.linkUrl}>
-        <div css={infoCss.section}>
-          <span css={infoCss.text}>
-            <img src={info.iconUrl} alt={info.name} />
-          </span>
-          <span>{info.name}</span>
-        </div>
+      <Link key={info.name} href={info.linkUrl}>
+        <a>
+          <div css={infoCss.section}>
+            <span css={infoCss.text}>
+              <img src={info.iconUrl} alt={info.name} />
+            </span>
+            <span>{info.name}</span>
+          </div>
+        </a>
       </Link>
     ))}
   </div>

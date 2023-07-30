@@ -1,9 +1,9 @@
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 
 const HeadWrapper = styled.div`
   height: 400px;
@@ -29,20 +29,22 @@ const Input = styled.input`
   height: 60px;
   font-size: 20px;
 `;
-const FindSpan = styled.button`
+const FindSpan = styled.button<{ isPw?: boolean }>`
   color: #777;
   font-size: 20px;
 
   &::before {
     ${(props) =>
       props.isPw
-        ? `content: '';
+        ? css`
+            content: '';
             display: inline-block;
             width: 1px;
             height: 18px;
             background-color: #777;
             vertical-align: -1px;
-            margin: 0 15px;`
+            margin: 0 15px;
+          `
         : ''}
   }
 `;
@@ -78,11 +80,11 @@ const Container = styled.div`
 `;
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
   const [isChkTrue, setIsChkTrue] = useState(false);
-  const onChangeId = (event) => {
+  const onChangeId = (event: ChangeEvent<HTMLInputElement>) => {
     setInputId(event.target.value);
     if (event.target.value && inputPw) {
       setIsChkTrue(true);
@@ -90,7 +92,7 @@ const SignIn = () => {
       setIsChkTrue(false);
     }
   };
-  const onChangePw = (event) => {
+  const onChangePw = (event: ChangeEvent<HTMLInputElement>) => {
     setInputPw(event.target.value);
     if (event.target.value && inputId) {
       setIsChkTrue(true);
@@ -100,7 +102,6 @@ const SignIn = () => {
   };
   return (
     <Layout
-      inner={<></>}
       footer={false}
       title="로그인"
       innerStyle={css`
@@ -118,7 +119,7 @@ const SignIn = () => {
             <Input placeholder="비밀번호" type="password" onChange={onChangePw} />
           </SubWrapper>
           <SubWrapper>
-            <DefaultButton text="로그인" inputId={inputId} isChkTrue={isChkTrue} />
+            <DefaultButton text="로그인" isChkTrue={isChkTrue} />
           </SubWrapper>
           <SubWrapper>
             <FindSpan>아이디 찾기</FindSpan>
@@ -135,7 +136,7 @@ const SignIn = () => {
             네이버로 로그인
           </ApiLoginBtn>
           <SignUp>
-            혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => navigate('/sign-up/agreement')}>회원가입</SignUpBtn>
+            혹시, 돌핀이 처음이신가요? <SignUpBtn onClick={() => router.push('/sign-up/agreement')}>회원가입</SignUpBtn>
           </SignUp>
         </FootWrapper>
       </Container>

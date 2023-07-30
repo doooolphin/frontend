@@ -4,14 +4,14 @@ import { color } from '@styles/common';
 import { RightOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
-import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 
 const FootWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const SubWrapper = styled.div`
+const SubWrapper = styled.div<{ isAll?: boolean }>`
   flex: 1;
   display: flex;
   align-items: center;
@@ -73,7 +73,7 @@ const SignUp = () => {
   ]);
 
   // 체크박스 단일 선택
-  const handleSingleCheck = (id) => {
+  const handleSingleCheck = (id: number) => {
     setAgreementItems(
       agreementItems.map((item) =>
         item.id === id
@@ -97,14 +97,14 @@ const SignUp = () => {
       }))
     );
   };
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const isChkTrue = agreementItems.every((item) => {
     return !item.required || (item.required && item.checked);
   });
 
   const onClickNext = () => {
-    if (isChkTrue) navigate('/sign-up/authentication');
+    if (isChkTrue) router.push('/sign-up/authentication');
   };
 
   return (

@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import DefaultButton from '@components/Common/Button/DefaultButton';
 import { color } from '@styles/common';
-import { memo, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, memo, useMemo, useRef, useState } from 'react';
 
-const SubWrapper = styled.div`
+const SubWrapper = styled.div<{
+  isLast?: boolean;
+}>`
   flex: 1;
   display: flex;
   align-items: center;
@@ -32,14 +34,18 @@ const MidWrapper = styled.span`
   min-height: 250px;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{
+  isRequest?: boolean;
+}>`
   border: none;
   outline: none;
   font-size: 14px;
   color: ${(props) => props.isRequest && color.lightgray};
 `;
 
-const SideWrapper = styled.div`
+const SideWrapper = styled.div<{
+  isLeft?: boolean;
+}>`
   border: none;
   outline: none;
   height: 60px;
@@ -54,8 +60,6 @@ const SideWrapper = styled.div`
 const NameBtn = styled.button`
   border: none;
   outline: none;
-  height: 60px;
-  font-size: 20px;
   border-radius: 20px;
   background: ${color.primary};
   color: ${color.white};
@@ -64,7 +68,9 @@ const NameBtn = styled.button`
   font-size: 14px;
 `;
 
-const NameText = styled.span`
+const NameText = styled.span<{
+  isRequest?: boolean;
+}>`
   font-size: 14px;
   color: ${(props) => props.isRequest && color.lightgray};
 `;
@@ -107,13 +113,20 @@ const btnWhiteColor = css`
   color: ${color.gray};
 `;
 
+type Info = {
+  name?: string;
+  birth?: string;
+  tel?: string;
+  isLocal?: boolean;
+  isMan?: boolean;
+};
 const SignUpAuthentication = () => {
-  const nameRef = useRef(null);
-  const birthRef = useRef(null);
-  const telRef = useRef(null);
-  const authNumRef = useRef(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const birthRef = useRef<HTMLInputElement>(null);
+  const telRef = useRef<HTMLInputElement>(null);
+  const authNumRef = useRef<HTMLInputElement>(null);
 
-  const [info, setInfo] = useState({
+  const [info, setInfo] = useState<Info>({
     name: '',
     birth: '',
     tel: '',
@@ -124,41 +137,41 @@ const SignUpAuthentication = () => {
   const [nameBtnState, setNameBtnState] = useState(false);
   const [birthBtnState, setBirthBtnState] = useState(false);
   const [isRequest, setIsRequest] = useState(false);
-  const [activeInfo, setActiveInfo] = useState(0);
+  const [activeInfo, setActiveInfo] = useState('');
 
-  const onClickSubWrapper = (active) => {
+  const onClickSubWrapper = (active: string) => {
     setActiveInfo(active);
     if (active === 'name') {
-      nameRef.current.focus();
+      nameRef?.current?.focus();
       !nameBtnState && setNameBtnState(true);
     } else if (active === 'birth') {
-      birthRef.current.focus();
+      birthRef?.current?.focus();
       !birthBtnState && setBirthBtnState(true);
     } else {
-      isRequest ? authNumRef.current.focus() : telRef.current.focus();
+      isRequest ? authNumRef?.current?.focus() : telRef?.current?.focus();
     }
   };
 
-  const setInfoState = (value) => {
+  const setInfoState = (value: Info) => {
     setInfo({
       ...info,
       ...value
     });
   };
 
-  const onChangeNameInput = (event) => {
+  const onChangeNameInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInfoState({
       name: event.target.value
     });
   };
 
-  const onChangeBirthInput = (event) => {
+  const onChangeBirthInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInfoState({
       birth: event.target.value
     });
   };
 
-  const onChangeTelInput = (event) => {
+  const onChangeTelInput = (event: ChangeEvent<HTMLInputElement>) => {
     setInfoState({
       tel: event.target.value
     });
@@ -182,11 +195,10 @@ const SignUpAuthentication = () => {
           css={
             activeInfo === 'name'
               ? borderColor
-              : null ||
-                (isRequest &&
-                  css`
-                    pointer-events: none;
-                  `)
+              : isRequest &&
+                css`
+                  pointer-events: none;
+                `
           }
           onClick={() => onClickSubWrapper('name')}
         >
@@ -227,11 +239,10 @@ const SignUpAuthentication = () => {
           css={
             activeInfo === 'birth'
               ? borderColor
-              : null ||
-                (isRequest &&
-                  css`
-                    pointer-events: none;
-                  `)
+              : isRequest &&
+                css`
+                  pointer-events: none;
+                `
           }
           onClick={() => onClickSubWrapper('birth')}
         >
@@ -298,7 +309,7 @@ const SignUpAuthentication = () => {
                 <AuthMessage>인증번호를 보내드렸어요. ( 0분 0초)</AuthMessage>
                 <ReDiv>
                   <Input ref={authNumRef} />
-                  <ReBtn onClickRequest={onClickRequest}>재요청</ReBtn>
+                  <ReBtn onClick={onClickRequest}>재요청</ReBtn>
                 </ReDiv>
               </AuthNumWrapper>
             </>

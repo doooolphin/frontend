@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 const Wrapper = styled.footer`
   position: fixed;
@@ -37,7 +38,10 @@ const Footer = ({ ...props }) => {
   };
   const onClickMy = () => {
     //
+    router.push('/my');
   };
+
+  const router = useRouter();
 
   return (
     <Wrapper {...props}>
