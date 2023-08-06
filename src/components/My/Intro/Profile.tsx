@@ -34,7 +34,13 @@ const profileCss = {
   `
 };
 
-const Profile = ({ nickname, membership, profileUrl }) => (
+type Props = {
+  nickname: string;
+  membership: string;
+  profileUrl: string;
+};
+
+const Profile = ({ nickname, membership, profileUrl }: Props) => (
   <div css={profileCss.wrap}>
     <div css={profileCss.image}>
       <img src={profileUrl} alt={`${nickname}님`} />
@@ -48,11 +54,5 @@ const Profile = ({ nickname, membership, profileUrl }) => (
     </span>
   </div>
 );
-
-Profile.propTypes = {
-  nickname: PropTypes.string,
-  membership: PropTypes.string,
-  profileUrl: PropTypes.string
-};
 
 export default Profile;

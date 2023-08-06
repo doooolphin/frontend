@@ -55,6 +55,9 @@
       "@constants/*": [
         "./src/constants/*"
       ],
+      "@models/*": [
+        "./src/models/*"
+      ],
       "@mocks/*": [
         "./src/mocks/*"
       ]
