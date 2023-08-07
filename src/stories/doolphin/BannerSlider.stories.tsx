@@ -1,5 +1,4 @@
 import BannerSlider from '@components/Common/Slider/BannerSlider';
-import { Banner } from '@models/banner';
 import { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof BannerSlider> = {
