@@ -34,7 +34,7 @@
     "axe-playwright": "^1.1.11",
     "chromatic": "^6.11.4",
     "cross-env": "^7.0.3",
-    "cypress": "^4.2.0",
+    "cypress": "10.3.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.4",
     "eslint-config-prettier": "^8.5.0",
