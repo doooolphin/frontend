@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import InfoButton from '../Button/InfoButton';
 import MenuButton from '../Button/MenuButton';
 import NoticeButton from '../Button/NoticeButton';
@@ -7,7 +6,7 @@ import { css } from '@emotion/react';
 import Address from './Address';
 import { color } from '@styles/common';
 
-const MainHeaderCss = {
+const mainHeaderCss = {
   wrap: css`
     background-color: ${color.primary};
     color: ${color.white};
@@ -23,7 +22,12 @@ const MainHeaderCss = {
   `
 };
 
-const MainHeader = ({ address, hasNotice }) => {
+type Props = {
+  address: string;
+  hasNotice: boolean;
+};
+
+const MainHeader = ({ address, hasNotice = false }: Props) => {
   const onClickAddress = () => {
     //TODO:
   };
@@ -39,22 +43,17 @@ const MainHeader = ({ address, hasNotice }) => {
 
   return (
     <Header
-      css={MainHeaderCss.wrap}
+      css={mainHeaderCss.wrap}
       left={<MenuButton onClick={onClickMenu} />}
       center={<Address address={address} onClickAddress={onClickAddress} />}
       right={
-        <div css={MainHeaderCss.buttonWrap}>
+        <div css={mainHeaderCss.buttonWrap}>
           <NoticeButton hasNotice={hasNotice} onClick={onClickNotice} />
           <InfoButton onClick={onClickInfo} />
         </div>
       }
     />
   );
-};
-
-MainHeader.propTypes = {
-  address: PropTypes.string,
-  hasNotice: PropTypes.bool
 };
 
 export default MainHeader;

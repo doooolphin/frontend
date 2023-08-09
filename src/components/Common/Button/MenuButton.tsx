@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 
 const menuButtonCss = {
@@ -11,7 +10,11 @@ const menuButtonCss = {
   `
 };
 
-const MenuButton = ({ onClick }) => {
+type Props = {
+  onClick: () => void;
+};
+
+const MenuButton = ({ onClick }: Props) => {
   return (
     <button css={menuButtonCss.wrap} onClick={onClick} aria-label="menu">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,10 +25,6 @@ const MenuButton = ({ onClick }) => {
       </svg>
     </button>
   );
-};
-
-MenuButton.propTypes = {
-  onClick: PropTypes.func
 };
 
 export default MenuButton;

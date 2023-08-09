@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 
-const AdressCss = {
+const addressCss = {
   wrap: css`
     position: absolute;
     top: 50%;
@@ -28,9 +27,13 @@ const AdressCss = {
   `
 };
 
-const Address = ({ address, onClickAddress }) => {
+type Props = {
+  address: string;
+  onClickAddress: () => void;
+};
+const Address = ({ address, onClickAddress }: Props) => {
   return (
-    <div css={AdressCss.wrap} onClick={onClickAddress}>
+    <div css={addressCss.wrap} onClick={onClickAddress}>
       <span>{address}</span>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -42,8 +45,4 @@ const Address = ({ address, onClickAddress }) => {
   );
 };
 
-Address.propTypes = {
-  address: PropTypes.string,
-  onClickAddress: PropTypes.func
-};
 export default Address;

@@ -63,7 +63,9 @@
     "@storybook/test-runner": "^0.13.0",
     "@storybook/testing-library": "^0.2.0",
     "@types/react-slick": "^0.23.10",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.12",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "msw": "^1.2.2",
     "storybook": "^7.2.1"
   },
