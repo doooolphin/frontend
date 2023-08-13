@@ -8,48 +8,38 @@ import NotifyTag from '@components/Restaurant/NotifyTag';
 
 const restaurantsCss = {
   wrap: css`
-    width: 93%;
     margin: 20px auto;
     box-shadow: 1px 5px 8px 0 #eee;
     border-radius: 10px;
   `,
-  foodWrap: css`
-    display: flex;
+  imageSection: css`
     width: 100%;
     height: 140px;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, auto));
+    grid-template-rows: repeat(2, minmax(50%, auto));
+    gap: 1px;
   `,
-  mainImageWrap: css`
-    height: 100%;
-    flex: 2;
-  `,
-  subImageWrap: css`
-    flex: 1;
+  mainImage: css`
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
   `,
   image: css`
     width: 100%;
     height: 100%;
   `,
-  foodSubWrap: css`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex: 1;
-    justify-content: space-between;
-    margin-left: 1px;
-  `,
   foodContentWrap: css`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    clear: both;
+    gap: 5px;
   `,
   content: css`
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 5px;
   `,
   title: css`
     text-overflow: ellipsis;
@@ -64,14 +54,17 @@ const restaurantsCss = {
   `,
   label: css`
     font-size: 13px;
-    margin-right: 5px;
   `,
-  gray: css`
+  contentName: css`
     color: ${color.darkGray};
   `,
-  bold: css`
-    font-weight: bold;
-    color: ${color.gray};
+  dots: css`
+    ::after {
+      content: '·';
+      font-weight: bold;
+      color: ${color.gray};
+      margin: 0 5px;
+    }
   `
 };
 
@@ -81,30 +74,21 @@ type Props = {
 
 const Restaurants = ({ restaurants }: Props) => {
   return (
-    <div>
+    <>
       {restaurants.map((restaurant) => (
         <div css={restaurantsCss.wrap} key={restaurant.code}>
-          <div css={restaurantsCss.foodWrap}>
-            <div css={restaurantsCss.mainImageWrap}>
-              <Image css={restaurantsCss.image} src={restaurant.mainImage} alt={restaurant.mainImage} />
-            </div>
-            {restaurant.images && restaurant.images.length > 1 && (
-              <div css={restaurantsCss.foodSubWrap}>
-                <div
-                  css={[
-                    restaurantsCss.subImageWrap,
-                    css`
-                      margin-bottom: 1px;
-                    `
-                  ]}
-                >
-                  <Image css={restaurantsCss.image} src={restaurant.images[0]} alt={restaurant.images[0]} />
-                </div>
-                <div css={restaurantsCss.subImageWrap}>
-                  <Image css={restaurantsCss.image} src={restaurant.images[1]} alt={restaurant.images[1]} />
-                </div>
-              </div>
-            )}
+          <div css={restaurantsCss.imageSection}>
+            <Image
+              css={[restaurantsCss.image, restaurantsCss.mainImage]}
+              src={restaurant.mainImage}
+              alt={restaurant.mainImage}
+            />
+            {restaurant.images &&
+              restaurant.images
+                .slice(0, 2)
+                .map((image, idx) => (
+                  <Image key={`${image}_${idx}`} css={restaurantsCss.image} src={image} alt={image} />
+                ))}
           </div>
           <div css={restaurantsCss.foodContentWrap}>
             <div css={restaurantsCss.content}>
@@ -113,13 +97,12 @@ const Restaurants = ({ restaurants }: Props) => {
               <DeliveryTime time={restaurant.time} />
             </div>
             <div css={restaurantsCss.content}>
-              <span css={restaurantsCss.label}>
-                <span css={restaurantsCss.gray}>최소주문</span> {restaurant.minOrderAcc}원{' '}
-                <strong css={restaurantsCss.bold}>·</strong>
+              <span css={[restaurantsCss.label, restaurantsCss.dots]}>
+                <span css={restaurantsCss.contentName}>최소주문</span>
+                {restaurant.minOrderAcc}원
               </span>
-              <span css={restaurantsCss.label}>
-                <span css={restaurantsCss.gray}>배달팁</span> {restaurant.accTip}{' '}
-                <strong css={restaurantsCss.bold}>·</strong>
+              <span css={[restaurantsCss.label, restaurantsCss.dots]}>
+                <span css={restaurantsCss.contentName}>배달팁</span> {restaurant.accTip}
               </span>
               <span css={restaurantsCss.label}>{restaurant.distance}</span>
             </div>
@@ -130,7 +113,7 @@ const Restaurants = ({ restaurants }: Props) => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

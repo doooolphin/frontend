@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 const deliveryTimeCss = {
   wrap: css`
     font-size: 13px;
-    margin-right: 5px;
     background: #eee;
     border-radius: 10px;
     padding: 0 5px;

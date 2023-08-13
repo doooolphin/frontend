@@ -1,7 +1,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { color, fontSize } from '@styles/common';
+import { color } from '@styles/common';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { RightOutlined } from '@ant-design/icons';
@@ -11,52 +11,45 @@ import { Restaurant } from '@models/restaurant';
 import NotifyTag from '@components/Restaurant/NotifyTag';
 
 const recentOrderCss = {
-  wrap: css`
-    padding: 10px;
-    height: 270px;
-  `,
   menuWrap: css`
     margin: 5px;
-    box-shadow: 1px 5px 8px 0 #eee;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    height: 270px;
+    max-width: 300px;
   `,
-  foodWrap: css`
-    display: flex;
+  imageWrap: css`
     width: 100%;
-    height: 120px;
-    border-radius: 10px 10px 0 0;
+    height: auto;
+    border-radius: 10px;
     overflow: hidden;
-    flex: 1;
   `,
-  foodContentWrap: css`
+  ContentWrap: css`
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    clear: both;
+    padding-block: 10px;
+    gap: 5px;
   `,
   content: css`
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 5px;
   `,
   title: css`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     font-weight: bold;
-    font-size: ${fontSize.h1};
+    font-size: 12px;
     flex: 1;
   `,
-  label: css`
-    font-size: 13px;
-    margin-right: 5px;
+  rating: css`
+    font-size: 12px;
   `,
-
-  gray: css`
+  label: css`
+    font-size: 12px;
+  `,
+  contentName: css`
     color: ${color.darkGray};
   `,
   image: css`
@@ -67,14 +60,14 @@ const recentOrderCss = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5px;
+    margin: 5px;
   `,
   mainTitle: css`
-    font-size: ${fontSize.h1};
+    font-size: 15px;
     font-weight: bold;
   `,
-  breakDown: css`
-    font-size: ${fontSize.h2};
+  orderLink: css`
+    font-size: 13px;
     color: ${color.darkGray};
     font-weight: bold;
   `
@@ -87,28 +80,18 @@ type Props = {
 const RecentOrderRestaurants = ({ restaurants }: Props) => {
   const settings = {
     dots: false,
-    arrows: true,
-    infinite: true,
+    arrows: false,
+    infinite: false,
     draggable: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    responsive: [
-      {
-        breakpoint: 530,
-        settings: {
-          slidesToShow: 2, // 530px 이하의 화면
-          slidesToScroll: 2
-        }
-      }
-    ]
+    variableWidth: true
   };
 
   return (
-    <div css={recentOrderCss.wrap}>
+    <>
       <div css={recentOrderCss.header}>
         <div css={recentOrderCss.mainTitle}>최근에 주문했어요</div>
-        <div css={recentOrderCss.breakDown}>
+        <div css={recentOrderCss.orderLink}>
           주문내역 보기
           <RightOutlined />
         </div>
@@ -116,24 +99,29 @@ const RecentOrderRestaurants = ({ restaurants }: Props) => {
       <Slider {...settings}>
         {restaurants.map((restaurant) => (
           <div key={restaurant.code}>
-            <div css={recentOrderCss.menuWrap}>
-              <div css={recentOrderCss.foodWrap}>
+            <div css={recentOrderCss.menuWrap} style={{ width: 150 }}>
+              <div css={recentOrderCss.imageWrap}>
                 <Image
                   width={200}
                   height={200}
+                  layout="responsive"
+                  style={{
+                    width: '100%',
+                    height: 'auto'
+                  }}
                   css={recentOrderCss.image}
                   src={restaurant.mainImage}
                   alt={restaurant.alt}
                 />
               </div>
-              <div css={recentOrderCss.foodContentWrap}>
+              <div css={recentOrderCss.ContentWrap}>
                 <div css={recentOrderCss.content}>
                   <div css={recentOrderCss.title}>{restaurant.title}</div>
-                  <Rating score={restaurant.score} />
+                  <Rating score={restaurant.score} css={recentOrderCss.rating} />
                 </div>
                 <div css={recentOrderCss.content}>
                   <div css={recentOrderCss.label}>
-                    <span css={recentOrderCss.gray}>배달팁</span> {restaurant.accTip}
+                    <span css={recentOrderCss.contentName}>배달팁</span> {restaurant.accTip}
                   </div>
                   <div css={recentOrderCss.label}>{restaurant.distance}</div>
                 </div>
@@ -149,7 +137,7 @@ const RecentOrderRestaurants = ({ restaurants }: Props) => {
           </div>
         ))}
       </Slider>
-    </div>
+    </>
   );
 };
 

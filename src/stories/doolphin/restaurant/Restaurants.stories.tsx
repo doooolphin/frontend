@@ -14,7 +14,7 @@ export const Primary: Story = {
       {
         code: 1,
         mainImage: 'doooolphinBanner1.png',
-        images: ['/doooolphinBanner1.png', '/doooolphinBanner1.png'],
+        images: ['/doooolphinBanner2.png', '/doooolphinBanner3.png'],
         alt: 'banner1',
         title: '대박 햄버거 치킨 피자 패스트푸드1',
         score: '4.9',

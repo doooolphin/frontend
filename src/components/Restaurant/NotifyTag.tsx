@@ -5,7 +5,7 @@ const tagCss = {
   tag: css`
     width: 34px;
     height: 20px;
-    font-size: 12px;
+    font-size: 10px;
     margin-right: 5px;
     display: flex;
     justify-content: center;
