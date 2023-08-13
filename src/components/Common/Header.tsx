@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import PropTypes from 'prop-types';
 import BackButton from './Button/BackButton';
 import InfoButton from './Button/InfoButton';
 import MenuButton from './Button/MenuButton';
 import NoticeButton from './Button/NoticeButton';
-import SearchInput from './SearchInput/SearchInput';
+import SearchInput from '@components/Common/Form/SearchInput';
 import { color } from '@styles/common';
 import { useRouter } from 'next/router';
 const HeaderWrapper = styled.header<{ search?: boolean; main?: boolean }>`

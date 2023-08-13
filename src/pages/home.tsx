@@ -2,8 +2,8 @@ import Layout from '@components/Common/Layout';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import BannerSlider from '@components/Common/Slider/BannerSlider';
-import RecentOrderList from '@components/Common/RecentOrderList/RecentOrderList';
 import MainHeader from '@components/Common/Header/MainHeader';
+import RecentOrderRestaurants from '@components/Restaurant/RecentOrderRestaurants';
 
 const OrderWrap = styled.div`
   margin: 70px 0 30px 0;
@@ -63,46 +63,46 @@ const Home = () => {
   };
 
   const orderListArgs = {
-    orderLists: [
+    restaurants: [
       {
         code: 1,
-        image: 'food1.png',
+        mainImage: '/food1.png',
         alt: 'food1',
         title: '대박 햄버거 치킨 피자 패스트푸드1',
         score: '4.9',
         time: '38~53분',
         accTip: '500원~4,500원',
-        card: '쿠폰'
+        useCoupon: true
       },
       {
         code: 2,
-        image: 'food2.png',
+        mainImage: '/food2.png',
         alt: 'food2',
         title: '대박 도넛',
         score: '4.9',
         time: '38~53분',
         accTip: '500원~4,500원',
-        card: '쿠폰'
+        useCoupon: true
       },
       {
         code: 3,
-        image: 'food3.jpg',
+        mainImage: '/food3.jpg',
         alt: 'food3',
         title: '대박 한식',
         score: '4.9',
         time: '38~53분',
         accTip: '500원~4,500원',
-        card: '쿠폰'
+        useCoupon: true
       },
       {
         code: 4,
-        image: 'food2.png',
+        mainImage: '/food2.png',
         alt: 'food4',
         title: '맛집이에용',
         score: '4.9',
         time: '38~53분',
         accTip: '500원~4,500원',
-        card: '쿠폰'
+        useCoupon: true
       }
     ]
   };
@@ -143,7 +143,7 @@ const Home = () => {
           <span>찜</span>
         </Item>
       </MyWrap>
-      <RecentOrderList {...orderListArgs} />
+      <RecentOrderRestaurants {...orderListArgs} />
     </Layout>
   );
 };
