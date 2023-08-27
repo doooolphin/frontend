@@ -316,9 +316,7 @@ const SignUpAuthentication = () => {
           )}
         </SubWrapper>
       </MidWrapper>
-      {isAbleRequest && (
-        <DefaultButton text="인증번호 요청" isChkTrue={true} radius="0" onClickRequest={onClickRequest} />
-      )}
+      {isAbleRequest && <DefaultButton text="인증번호 요청" isActive={true} radius={0} onClick={onClickRequest} />}
     </Layout>
   );
 };

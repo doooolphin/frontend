@@ -1,29 +1,43 @@
-import styled from '@emotion/styled';
 import { color } from '@styles/common';
+import { css } from '@emotion/react';
 
 type Props = {
   text?: string;
-  radius?: string;
-  onClickNext?: () => void;
-  onClickRequest?: () => void;
-  isChkTrue: boolean;
+  radius?: number;
+  onClick: () => void;
+  isActive: boolean;
 };
 
-const LoginBtn = styled.button<Props>`
-  background: ${(props) => (props.isChkTrue ? color.primary : color.lightgray)};
-  color: #ffffff;
-  height: 70px;
-  border-radius: ${(props) => (props.radius === '0' ? '0px' : '5px')};
-  font-size: 20px;
-  font-weight: bold;
-  width: 100%;
-`;
+const buttonCss = {
+  button: css`
+    background: ${color.lightgray};
+    color: #ffffff;
+    height: 70px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+  `,
+  activeButton: css`
+    background: ${color.primary};
+  `
+};
 
 const DefaultButton = (props: Props) => {
   return (
-    <LoginBtn onClick={props.onClickNext || props.onClickRequest} isChkTrue={props.isChkTrue} radius={props.radius}>
+    <button
+      css={[
+        buttonCss.button,
+        props.isActive && buttonCss.activeButton,
+        props.radius &&
+          css`
+            border-radius: ${props.radius}px;
+          `
+      ]}
+      onClick={props.onClick}
+    >
       {props.text}
-    </LoginBtn>
+    </button>
   );
 };
 
