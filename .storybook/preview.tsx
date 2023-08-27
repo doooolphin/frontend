@@ -13,7 +13,7 @@ const customViewports = {
   doooolphin: {
     name: 'doooolphin',
     styles: {
-      width: '360px',
+      width: '400px',
       height: '640px'
     }
   }

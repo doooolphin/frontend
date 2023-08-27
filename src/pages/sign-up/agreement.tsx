@@ -7,18 +7,13 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
 const agreementCss = {
-  wrap: css`
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  `,
   title: css`
     font-size: 2em;
     font-weight: bold;
     margin-top: 60px;
   `,
   agreeList: css`
+    margin-top: 50px;
     height: 450px;
     display: flex;
     flex-direction: column;
@@ -53,6 +48,7 @@ const agreementCss = {
     cursor: pointer;
   `,
   buttonWrap: css`
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
   `
@@ -114,49 +110,48 @@ const SignUp = () => {
       innerStyle={css`
         display: flex;
         flex-direction: column;
-        height: 100vh;
       `}
     >
-      <div css={agreementCss.wrap}>
-        <div css={agreementCss.title}>
-          반가워요! 가입하려면
-          <br />
-          약관에 동의가 필요해요.
-        </div>
-        <div css={agreementCss.agreeList}>
-          <label css={[agreementCss.agreeItem, agreementCss.agreeItemAll]} htmlFor="checkbox_all">
-            <span css={agreementCss.textWrap}>
-              <input
-                css={agreementCss.checkbox}
-                id="checkbox_all"
-                type="checkbox"
-                onChange={handleAllCheck}
-                checked={isAllChecked}
-              />
-              전체동의
-            </span>
-          </label>
-          {agreementItems?.map((data, key) => {
-            return (
-              <label css={[agreementCss.agreeItem]} key={key} htmlFor={`checkbox_${data.id}`}>
-                <span css={agreementCss.textWrap}>
-                  <input
-                    css={agreementCss.checkbox}
-                    id={`checkbox_${data.id}`}
-                    type="checkbox"
-                    onChange={() => handleSingleCheck(data.id)}
-                    checked={data.checked}
-                  />
-                  {`${data.title} (${data.required ? '필수' : '선택'})`}
-                </span>
-                <RightOutlined css={agreementCss.arrow} />
-              </label>
-            );
-          })}
-        </div>
-        <div css={agreementCss.buttonWrap}>
-          <DefaultButton text="다음" onClick={onClickNext} isActive={isActive} />
-        </div>
+      <div css={agreementCss.title}>
+        반가워요! 가입하려면
+        <br />
+        약관에 동의가 필요해요.
+      </div>
+      <div css={agreementCss.agreeList}>
+        <label css={[agreementCss.agreeItem, agreementCss.agreeItemAll]} htmlFor="checkbox_all">
+          <span css={agreementCss.textWrap}>
+            <input
+              css={agreementCss.checkbox}
+              id="checkbox_all"
+              data-testid="checkbox_all"
+              type="checkbox"
+              onChange={handleAllCheck}
+              checked={isAllChecked}
+            />
+            전체동의
+          </span>
+        </label>
+        {agreementItems?.map((data, key) => {
+          return (
+            <label css={[agreementCss.agreeItem]} key={key} htmlFor={`checkbox_${data.id}`}>
+              <span css={agreementCss.textWrap}>
+                <input
+                  css={agreementCss.checkbox}
+                  id={`checkbox_${data.id}`}
+                  data-testid={`checkbox_${data.required ? 'required' : 'optional'}_${data.id}`}
+                  type="checkbox"
+                  onChange={() => handleSingleCheck(data.id)}
+                  checked={data.checked}
+                />
+                {`${data.title} (${data.required ? '필수' : '선택'})`}
+              </span>
+              <RightOutlined css={agreementCss.arrow} />
+            </label>
+          );
+        })}
+      </div>
+      <div css={agreementCss.buttonWrap}>
+        <DefaultButton text="다음" onClick={onClickNext} isActive={isActive} />
       </div>
     </Layout>
   );
