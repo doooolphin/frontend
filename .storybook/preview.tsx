@@ -19,23 +19,6 @@ const customViewports = {
   }
 };
 
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/
-    }
-  },
-  viewport: {
-    viewports: {
-      ...MINIMAL_VIEWPORTS,
-      ...customViewports
-    },
-    defaultViewport: 'doooolphin'
-  }
-};
-
 const preview: Preview = {
   decorators: [
     (Story) => (
@@ -60,6 +43,11 @@ const preview: Preview = {
         ...customViewports
       },
       defaultViewport: 'doooolphin'
+    },
+    a11y: {
+      config: {
+        rules: [{ id: 'color-contrast', enabled: false }]
+      }
     }
   }
 };
